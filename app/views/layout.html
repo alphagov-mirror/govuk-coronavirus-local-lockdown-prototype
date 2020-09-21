@@ -29,6 +29,9 @@
 {% from "govuk/components/textarea/macro.njk"         import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
+{% from "govuk-pub/components/feedback/macro.njk" import govukPubFeedback %}
+{% from "govuk-pub/components/related-navigation/macro.njk" import govukPubRelatedNavigation %}
+
 {% block head %}
   {% include "includes/head.html" %}
 {% endblock %}
@@ -52,6 +55,12 @@
 
 {% if useAutoStoreData %}
   {% block footer %}
+    {{ govukPubFeedback({
+      attributes: {
+        id: 'feedback'
+      },
+      classes: "govuk-width-container"
+    }) }}
     {{ govukFooter({
       meta: {
         items: [

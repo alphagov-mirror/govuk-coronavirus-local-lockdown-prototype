@@ -26,6 +26,9 @@ $govuk-assets-path: '/govuk/assets/';
 @import "utilities/overwrites";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+.app-tag--prototype {
+  background-color: govuk-colour('red');
+}
 
 .app-locator-form {
   padding: govuk-spacing(3);

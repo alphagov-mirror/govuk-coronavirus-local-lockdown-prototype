@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block beforeContent %}
+  {% include "includes/phase-banner.html" %}
   {{ govukBreadcrumbs({
     items: [
       {
@@ -24,7 +25,13 @@
         {{ serviceName }}
       </h1>
 
-      <p class="govuk-body">Find out what coronavirus restrictions are in place for a specific postcode. For example, where you live, work, or visit.</p>
+      {{ govukInsetText({
+        html: 'Find out what restrictions are in place in <a class="govuk-link" href="#">Scotland</a>, <a class="govuk-link" href="#">Wales</a> and <a class="govuk-link" href="#">Northern Ireland</a>.'
+      }) }}
+
+      <p class="govuk-body">Find out what coronavirus restrictions are in place in a specific location. This is sometimes called a ‘local lockdown’.</p>
+
+      <p class="govuk-body">Enter the postcode of the place you want to find information about. For example where you live, work, or visit.</p>
 
       <div class="app-locator-form">
 
@@ -48,11 +55,14 @@
         </form>
 
         <p class="govuk-body">
-          <a class="govuk-link" href="#">Find a postcode on Royal Mail's postcode finder</a>
+          <a class="govuk-link govuk-link--no-visited-state" href="http://www.royalmail.com/find-a-postcode">Find a postcode on Royal Mail's postcode finder</a>
         </p>
 
       </div>
 
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {% include "includes/related-navigation.html" %}
     </div>
   </div>
 

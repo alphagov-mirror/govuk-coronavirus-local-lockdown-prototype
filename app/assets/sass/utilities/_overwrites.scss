@@ -11,3 +11,7 @@
   margin-bottom: 0 !important;
   border-bottom: 0 !important;
 }
+
+.govuk-footer {
+  border-top: govuk-spacing(2) solid govuk-colour('blue');
+}

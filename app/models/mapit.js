@@ -1,6 +1,7 @@
 'use strict'
 
 const https = require('https')
+const fetch = require('node-fetch')
 
 exports.find = (postcode) => {
   let parsedData = {}
@@ -43,6 +44,22 @@ exports.find = (postcode) => {
 
   return parsedData
 }
+
+// exports.find = (postcode) => {
+//   const url = `https://mapit.mysociety.org/postcode/${postcode}`
+//
+//   const getData = async url => {
+//     try {
+//       const response = await fetch(url)
+//       const json = await response.json()
+//       console.log(json)
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+//
+//   return getData(url)
+// }
 
 exports.getArea = (postcode, type = 'council_county') => {
   // const data = this.find(postcode)
