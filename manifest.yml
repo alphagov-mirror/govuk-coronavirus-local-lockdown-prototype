@@ -1,0 +1,6 @@
+applications:
+  - name: govuk-coronavirus-local-lockdown
+    buildpacks:
+      - nodejs_buildpack
+    env:
+      USERNAME: betademo
