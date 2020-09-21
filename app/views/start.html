@@ -1,0 +1,59 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "/"
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{ serviceName }}
+      </h1>
+
+      <p class="govuk-body">Find out what coronavirus restrictions are in place for a specific postcode. For example, where you live, work, or visit.</p>
+
+      <div class="app-locator-form">
+
+        <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
+
+          {{ govukInput({
+            id: "postcode",
+            name: "postcode",
+            label: {
+              text: "Enter a postcode"
+            },
+            hint: {
+              text: "For example SW1A 2AA"
+            }
+          }) }}
+
+          {{ govukButton({
+            text: "Find"
+          }) }}
+
+        </form>
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Find a postcode on Royal Mail's postcode finder</a>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
