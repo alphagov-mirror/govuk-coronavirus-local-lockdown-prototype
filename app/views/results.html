@@ -20,9 +20,17 @@
         {{ serviceName }}
       </h1>
 
-      {{ data.postcode }}
+      <p class="govuk-body">We've matched your postcode to <span class="govuk-!-font-weight-bold">{{ area.name }}</span></p>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="#">Find out what you can and cannot do</a>.
+      </p>
+
+      {#{ data.postcode }#}
 
     </div>
   </div>
+
+  {{content|dump|safe}}
 
 {% endblock %}
