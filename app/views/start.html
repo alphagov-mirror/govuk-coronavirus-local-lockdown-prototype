@@ -23,6 +23,19 @@
 
 {% block content %}
 
+  {%- if errors.length %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: errors
+      }) }}
+
+    </div>
+  </div>
+  {% endif -%}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
@@ -49,7 +62,9 @@
             },
             hint: {
               text: "For example SW1A 2AA"
-            }
+            },
+            errorMessage: errors | getErrorMessage('postcode'),
+            value: data.postcode
           }) }}
 
           {{ govukButton({
