@@ -17,14 +17,40 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">
-        {{ serviceName }}
-      </h1>
 
-      <p class="govuk-body">We've matched your postcode to <span class="govuk-!-font-weight-bold">{{ area.name }}</span></p>
+      {% if data.postcode | lower in ['e1 8qs','e18qs'] %}
+        <h1 class="govuk-heading-xl">
+          There are tier 1 restrictions in this area
+        </h1>
+        <p class="govuk-body">This means you should follow the national guidelines</p>
+      {% elif data.postcode | lower in ['m1 1ad','m11ad'] %}
+        <h1 class="govuk-heading-xl">
+          There are tier 2 restrictions in this area
+        </h1>
+      {% elif data.postcode | lower in ['bl1 1ad','bl11ad'] %}
+        <h1 class="govuk-heading-xl">
+          There are tier 3 restrictions in this area
+        </h1>
+      {% elif data.postcode | lower in ['l1 0aa','l10aa'] %}
+        <h1 class="govuk-heading-xl">
+          There will be new restrictions soon
+        </h1>
+      {% else %}
+        <h1 class="govuk-heading-xl">
+          There are no restrictions
+        </h1>
+      {% endif %}
 
       <p class="govuk-body">
         <a class="govuk-link" href="#">Find out what you can and cannot do</a>.
+      </p>
+
+      <p class="govuk-body govuk-!-font-weight-bold">
+        If you travel to other areas
+      </p>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="/">Enter another postcode</a> to find out what restrictions there are.
       </p>
 
     </div>
