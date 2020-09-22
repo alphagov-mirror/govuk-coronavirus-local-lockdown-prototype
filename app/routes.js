@@ -3,6 +3,8 @@
 const express = require('express')
 const router = express.Router()
 
+const Restrictions = require('./models/restrictions')
+
 // const https = require('https')
 // const fetch = require('node-fetch')
 //
@@ -28,7 +30,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const errors = []
-  const regex = /^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/
+  const regex = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/
 
   if (!req.session.data.postcode.length) {
     const error = {}
