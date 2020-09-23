@@ -18,32 +18,65 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {% if data.postcode | lower in ['e1 8qs','e18qs'] %}
+      {%- if data.postcode | lower in ['e1 8qs','e18qs'] %}
         <h1 class="govuk-heading-xl">
           There are tier 1 restrictions in this area
         </h1>
-        <p class="govuk-body">This means you should follow the national guidelines</p>
+        <p class="govuk-body">Their are 3 levels of restrictions. Tier 1 areas have the lowest level of restrictions. This means you should follow the national guidelines.</p>
       {% elif data.postcode | lower in ['m1 1ad','m11ad'] %}
         <h1 class="govuk-heading-xl">
           There are tier 2 restrictions in this area
         </h1>
+        <p class="govuk-body">Their are 3 levels of restrictions. Tier 2 areas have the middle level of restrictions.</p>
       {% elif data.postcode | lower in ['bl1 1ad','bl11ad'] %}
         <h1 class="govuk-heading-xl">
           There are tier 3 restrictions in this area
         </h1>
+        <p class="govuk-body">Their are 3 levels of restrictions. Tier 3 areas have the highest level of restrictions.</p>
       {% elif data.postcode | lower in ['l1 0aa','l10aa'] %}
         <h1 class="govuk-heading-xl">
           There will be new restrictions soon
         </h1>
+      {% elif data.postcode | lower in ['sw1a 2aa','sw1a2aa'] %}
+        <h1 class="govuk-heading-xl">
+          There is no information about the restrictions in this area
+        </h1>
+      {% elif data.postcode | lower in ['ab14 0ab','ab140ab'] %}
+        <!-- Scotland -->
+        <h1 class="govuk-heading-xl">
+          There might be restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.gov.scot/coronavirus-covid-19/">Find out what you can or cannot do from the Scottish Government.</a>
+        </p>
+      {% elif data.postcode | lower in ['ll11 0by','ll110by'] %}
+        <!-- Wales -->
+        <h1 class="govuk-heading-xl">
+          There might be restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://gov.wales/local-lockdown">Find out what you can or cannot do from the Welsh Government.</a>
+        </p>
+      {% elif data.postcode | lower in ['bt1 1bg','bt11bg'] %}
+        <!-- Northern Ireland -->
+        <h1 class="govuk-heading-xl">
+          There might be restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions">Find out what you can or cannot do from the Northern Ireland Government.</a>
+        </p>
       {% else %}
         <h1 class="govuk-heading-xl">
-          There are no restrictions
+          There are no restrictions in this area
         </h1>
-      {% endif %}
+        <p class="govuk-body">This means you should follow the national guidelines.</p>
+      {% endif -%}
 
+      {%- if data.postcode | lower not in ['ab14 0ab','ab140ab','ll11 0by','ll110by','bt1 1bg','bt11bg'] %}
       <p class="govuk-body">
         <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">Find out what you can and cannot do</a>.
       </p>
+      {% endif -%}
 
       <p class="govuk-body govuk-!-font-weight-bold">
         If you travel to other areas
