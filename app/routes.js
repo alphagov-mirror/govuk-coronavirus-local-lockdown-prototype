@@ -55,30 +55,25 @@ router.post('/', (req, res) => {
 
 router.get('/results', checkHasPostcode, (req, res) => {
 
-  // let url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
-  //
-  // console.log(url)
-  //
-  // const getData = async url => {
-  //   try {
-  //     const response = await fetch(url)
-  //     const json = await response.json()
-  //     console.log('Inside', json)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-  //
-  // const data = getData(url)
-  //
-  // console.log('Outside', data)
+  const url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
 
-  res.render('results', {
-    actions: {
-      back: `${req.baseUrl}/`
-    }
-  })
+  console.log(url)
 
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      // console.log('Outside', data)
+      res.render('results', {
+        actions: {
+          back: `${req.baseUrl}/`
+        },
+        content: data
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      // render an error page, or the results page with an error state
+    })
 })
 
 // --------------------------------------------------
