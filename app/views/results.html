@@ -42,7 +42,7 @@
       {% endif %}
 
       <p class="govuk-body">
-        <a class="govuk-link" href="#">Find out what you can and cannot do</a>.
+        <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">Find out what you can and cannot do</a>.
       </p>
 
       <p class="govuk-body govuk-!-font-weight-bold">
@@ -59,6 +59,6 @@
     </div>
   </div>
 
-  {{content|dump|safe}}
+  {#{content|dump|safe}#}
 
 {% endblock %}
