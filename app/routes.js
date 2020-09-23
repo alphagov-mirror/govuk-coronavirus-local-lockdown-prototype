@@ -1,4 +1,4 @@
-'use strict'
+  'use strict'
 
 const express = require('express')
 const router = express.Router()
@@ -55,25 +55,31 @@ router.post('/', (req, res) => {
 
 router.get('/results', checkHasPostcode, (req, res) => {
 
-  const url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
+  // const url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
+  //
+  // // console.log(url)
+  //
+  // fetch(url)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     // console.log('Outside', data)
+  //     res.render('results', {
+  //       actions: {
+  //         back: `${req.baseUrl}/`
+  //       },
+  //       content: data
+  //     })
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //     // render an error page, or the results page with an error state
+  //   })
 
-  console.log(url)
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      // console.log('Outside', data)
-      res.render('results', {
-        actions: {
-          back: `${req.baseUrl}/`
-        },
-        content: data
-      })
-    })
-    .catch(error => {
-      console.log(error)
-      // render an error page, or the results page with an error state
-    })
+  res.render('results', {
+    actions: {
+      back: `${req.baseUrl}/`
+    }
+  })
 })
 
 // --------------------------------------------------
