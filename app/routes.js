@@ -1,4 +1,4 @@
-  'use strict'
+'use strict'
 
 const express = require('express')
 const router = express.Router()
@@ -14,7 +14,7 @@ function checkHasPostcode (req, res, next) {
 }
 
 router.get('/', (req, res) => {
-  delete req.session.data;
+  delete req.session.data
 
   res.render('start', {
     actions: {
@@ -54,32 +54,34 @@ router.post('/', (req, res) => {
 })
 
 router.get('/results', checkHasPostcode, (req, res) => {
+  let url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
 
-  // const url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
-  //
-  // // console.log(url)
-  //
-  // fetch(url)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     // console.log('Outside', data)
-  //     res.render('results', {
-  //       actions: {
-  //         back: `${req.baseUrl}/`
-  //       },
-  //       content: data
-  //     })
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //     // render an error page, or the results page with an error state
-  //   })
+  if (process.env.MAPIT_API_KEY !== undefined && process.env.MAPIT_API_KEY.length) {
+    url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}?api_key=${process.env.MAPIT_API_KEY}`
+  }
 
-  res.render('results', {
-    actions: {
-      back: `${req.baseUrl}/`
-    }
-  })
+  console.log(url)
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      res.render('results', {
+        actions: {
+          back: `${req.baseUrl}/`
+        },
+        content: data
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      // render an error page, or the results page with an error state
+      res.render('results', {
+        actions: {
+          back: `${req.baseUrl}/`
+        }
+      })
+    })
 })
 
 // --------------------------------------------------

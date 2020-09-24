@@ -22,17 +22,14 @@
         <h1 class="govuk-heading-xl">
           There are tier 1 restrictions in this area
         </h1>
-        <p class="govuk-body">Their are 3 levels of restrictions. Tier 1 areas have the lowest level of restrictions. This means you should follow the national guidelines.</p>
       {% elif data.postcode | lower in ['m1 1ad','m11ad'] %}
         <h1 class="govuk-heading-xl">
           There are tier 2 restrictions in this area
         </h1>
-        <p class="govuk-body">Their are 3 levels of restrictions. Tier 2 areas have the middle level of restrictions.</p>
       {% elif data.postcode | lower in ['bl1 1ad','bl11ad'] %}
         <h1 class="govuk-heading-xl">
           There are tier 3 restrictions in this area
         </h1>
-        <p class="govuk-body">Their are 3 levels of restrictions. Tier 3 areas have the highest level of restrictions.</p>
       {% elif data.postcode | lower in ['l1 0aa','l10aa'] %}
         <h1 class="govuk-heading-xl">
           There will be new restrictions soon
@@ -65,6 +62,13 @@
         <p class="govuk-body">
           <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions">Find out what you can or cannot do from the Northern Ireland Government.</a>
         </p>
+      {% elif data.postcode | lower in ['sw1a 2lw','sw1a2lw'] %}
+        <h1 class="govuk-heading-xl">
+          There is no information about the restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">All coronavirus infomation about what you can and cannot do.</a>
+        </p>
       {% else %}
         <h1 class="govuk-heading-xl">
           There are no restrictions in this area
@@ -72,7 +76,7 @@
         <p class="govuk-body">This means you should follow the national guidelines.</p>
       {% endif -%}
 
-      {%- if data.postcode | lower not in ['ab14 0ab','ab140ab','ll11 0by','ll110by','bt1 1bg','bt11bg'] %}
+      {%- if data.postcode | lower not in ['ab14 0ab','ab140ab','ll11 0by','ll110by','bt1 1bg','bt11bg','sw1a 2lw','sw1a2lw'] %}
       <p class="govuk-body">
         <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">Find out what you can and cannot do</a>.
       </p>
@@ -92,6 +96,8 @@
     </div>
   </div>
 
-  {#{content|dump|safe}#}
+  {%-if content | length %}
+    <!-- {{ content | dump | safe }} -->
+  {% endif -%}
 
 {% endblock %}
