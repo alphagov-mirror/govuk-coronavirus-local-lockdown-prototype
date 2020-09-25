@@ -20,20 +20,22 @@
 
       {%- if data.postcode | lower in ['e1 8qs','e18qs'] %}
         <h1 class="govuk-heading-xl">
-          There are level 1 restrictions in this area
+          This area is in local alert level 1
         </h1>
       {% elif data.postcode | lower in ['m1 1ad','m11ad'] %}
         <h1 class="govuk-heading-xl">
-          There are level 2 restrictions in this area
+          This area is in local alert level 2
         </h1>
       {% elif data.postcode | lower in ['bl1 1ad','bl11ad'] %}
         <h1 class="govuk-heading-xl">
-          There are level 3 restrictions in this area
+          This area is in local alert level 3
         </h1>
       {% elif data.postcode | lower in ['l1 0aa','l10aa'] %}
         <h1 class="govuk-heading-xl">
           There will be new restrictions soon
         </h1>
+        <p class="govuk-body">At the moment this area is in local alert level 1.</p>
+        <p class="govuk-body">From the 18 October this area will be in local alert level 2.</p>
       {% elif data.postcode | lower in ['sw1a 2aa','sw1a2aa','sw1a 2lw','sw1a2lw'] %}
         <h1 class="govuk-heading-xl">
           There is no information about the restrictions in this area
