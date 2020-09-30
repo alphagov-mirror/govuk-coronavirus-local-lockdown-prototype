@@ -29,6 +29,9 @@
 {% from "govuk/components/textarea/macro.njk"         import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
+{% from "govuk-pub/components/feedback/macro.njk" import govukPubFeedback %}
+{% from "govuk-pub/components/related-navigation/macro.njk" import govukPubRelatedNavigation %}
+
 {% block head %}
   {% include "includes/head.html" %}
 {% endblock %}
@@ -43,21 +46,24 @@
   {{ govukHeader({
     homepageUrl: "/",
     serviceUrl: "/",
-    containerClasses: "govuk-width-container"
+    containerClasses: "govuk-width-container govuk-header__container--no-border-bottom"
   }) }}
+  {% include "includes/global-bar-narrow.html" %}
 {% endblock %}
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
 {% if useAutoStoreData %}
   {% block footer %}
+    {{ govukPubFeedback({
+      attributes: {
+        id: 'feedback'
+      },
+      classes: "govuk-width-container"
+    }) }}
     {{ govukFooter({
       meta: {
         items: [
-          {
-            href: "https://govuk-prototype-kit.herokuapp.com/",
-            text: "GOV.UK Prototype Kit " + releaseVersion
-          },
           {
             href: "/prototype-admin/clear-data",
             text: "Clear data"

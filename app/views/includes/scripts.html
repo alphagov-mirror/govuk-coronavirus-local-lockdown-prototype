@@ -10,3 +10,10 @@
 {% if useAutoStoreData %}
   <script src="/public/javascripts/auto-store-data.js"></script>
 {% endif %}
+
+<script src="/public/javascripts/components/feedback.js"></script>
+<script type="text/javascript">
+  var $element = $('#feedback');
+  var feedback = new GOVUK.Modules.Feedback();
+  feedback.start($element);
+</script>

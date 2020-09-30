@@ -1,0 +1,101 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/phase-banner.html" %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {%- if data.postcode | lower in ['e1 8qs','e18qs'] %}
+        <h1 class="govuk-heading-xl">
+          This area is in alert level 1
+        </h1>
+      {% elif data.postcode | lower in ['m1 1ad','m11ad'] %}
+        <h1 class="govuk-heading-xl">
+          This area is in alert level 2
+        </h1>
+      {% elif data.postcode | lower in ['bl1 1ad','bl11ad'] %}
+        <h1 class="govuk-heading-xl">
+          This area is in alert level 3
+        </h1>
+      {% elif data.postcode | lower in ['l1 0aa','l10aa'] %}
+        <h1 class="govuk-heading-xl">
+          There will be new restrictions soon
+        </h1>
+        <p class="govuk-body">At the moment this area is in local alert level 1.</p>
+        <p class="govuk-body">From the 18 October this area will be in local alert level 2.</p>
+      {% elif data.postcode | lower in ['sw1a 2aa','sw1a2aa','sw1a 2lw','sw1a2lw'] %}
+        <h1 class="govuk-heading-xl">
+          There is no information about the restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">All coronavirus infomation about what you can and cannot do.</a>
+        </p>
+      {% elif data.postcode | lower in ['ab14 0ab','ab140ab'] %}
+        <!-- Scotland -->
+        <h1 class="govuk-heading-xl">
+          There might be restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.gov.scot/coronavirus-covid-19/">Find out what you can or cannot do from the Scottish Government.</a>
+        </p>
+      {% elif data.postcode | lower in ['ll11 0by','ll110by'] %}
+        <!-- Wales -->
+        <h1 class="govuk-heading-xl">
+          There might be restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://gov.wales/local-lockdown">Find out what you can or cannot do from the Welsh Government.</a>
+        </p>
+      {% elif data.postcode | lower in ['bt1 1bg','bt11bg'] %}
+        <!-- Northern Ireland -->
+        <h1 class="govuk-heading-xl">
+          There might be restrictions in this area
+        </h1>
+        <p class="govuk-body">
+          <a class="govuk-link" href="https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions">Find out what you can or cannot do from the Northern Ireland Government.</a>
+        </p>
+      {% else %}
+        <h1 class="govuk-heading-xl">
+          There are no restrictions in this area
+        </h1>
+        <p class="govuk-body">This means you should follow the national guidelines.</p>
+      {% endif -%}
+
+      {%- if data.postcode | lower not in ['ab14 0ab','ab140ab','ll11 0by','ll110by','bt1 1bg','bt11bg','sw1a 2aa','sw1a2aa','sw1a 2lw','sw1a2lw'] %}
+      <p class="govuk-body">
+        <a class="govuk-link" href="https://draft-origin.integration.publishing.service.gov.uk/local-alert-levels?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNGM3ZGJkMy0yMDIzLTQzZDYtYmNkOS03OGVlOTU2NmRiYjYiLCJjb250ZW50X2lkIjoiOWY0NWExZTQtYTFlZi00ZTk0LTgwYjEtMmYzZDQxMTE5ZjQ3IiwiaWF0IjoxNjAxMDMzMTAzLCJleHAiOjE2MDM2Mjg3MDN9.mTrsAQ-kJ4NaCLpd38AxeFJrzs9NyhZ0kgjXRhyaHkA">Find out what you can and cannot do</a>.
+      </p>
+      {% endif -%}
+
+      <h2 class="govuk-heading-m">
+        If you travel to other areas
+      </h2>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="/">Enter another postcode</a> to find out what restrictions there are.
+      </p>
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {% include "includes/related-navigation.html" %}
+    </div>
+  </div>
+
+  {%-if content | length %}
+    <!-- {{ content | dump | safe }} -->
+  {% endif -%}
+
+{% endblock %}

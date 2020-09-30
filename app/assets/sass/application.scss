@@ -16,5 +16,22 @@ $govuk-assets-path: '/govuk/assets/';
 
 // Components that aren't in Frontend
 @import "components/cookie-banner";
+@import "components/global-bar";
+
+// Objects
+
+// Core
+
+// Utilities
+@import "utilities/overwrites";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+.app-tag--prototype {
+  background-color: govuk-colour('red');
+}
+
+.app-locator-form {
+  padding: govuk-spacing(3);
+  margin: govuk-spacing(6) 0;
+  background-color: govuk-colour('light-grey');
+}
