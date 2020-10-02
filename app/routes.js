@@ -5,6 +5,9 @@ const router = express.Router()
 
 const fetch = require('node-fetch')
 
+// const MapIt = require('./models/mapit')
+const Restrictions = require('./models/restrictions')
+
 function checkHasPostcode (req, res, next) {
   if (req.session.data.postcode === undefined || !req.session.data.postcode.length) {
     res.redirect(`${req.baseUrl}/`)
@@ -15,6 +18,9 @@ function checkHasPostcode (req, res, next) {
 
 router.get('/', (req, res) => {
   delete req.session.data
+
+  // console.log(Restrictions.find());
+  // console.log(MapIt.find('AL5 1ND'));
 
   res.render('start', {
     actions: {
@@ -54,6 +60,16 @@ router.post('/', (req, res) => {
 })
 
 router.get('/results', checkHasPostcode, (req, res) => {
+
+  // const data = MapIt.find(req.session.data.postcode)
+  //
+  // res.render('results', {
+  //   actions: {
+  //     back: `${req.baseUrl}/`
+  //   },
+  //   content: data
+  // })
+
   let url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
 
   if (process.env.MAPIT_API_KEY !== undefined && process.env.MAPIT_API_KEY.length) {
@@ -66,11 +82,40 @@ router.get('/results', checkHasPostcode, (req, res) => {
     .then(res => res.json())
     .then(data => {
       console.log(data)
+      const restrictions = Restrictions.find()
+      const locations = []
+      const lockdowns = []
+
+      if (data.areas !== undefined) {
+        // loop over the area data pulling out the Government Statistical Service (GSS) code for the area
+        for (const property in data.areas) {
+          if (data.areas[property].codes.gss !== undefined) {
+            locations.push(data.areas[property].codes.gss)
+          }
+        }
+
+        console.log(locations)
+
+        // loop over the GSS location codes to find the restriction for an area
+        locations.forEach(location => {
+          if (restrictions[location] !== undefined) {
+            lockdowns.push(restrictions[location])
+            console.log(restrictions[location])
+          } else {
+            // no restrictions
+            console.log(location + ' not found')
+          }
+        })
+
+        console.log(lockdowns)
+      }
+
+
       res.render('results', {
         actions: {
           back: `${req.baseUrl}/`
         },
-        content: data
+        content: lockdowns[0]
       })
     })
     .catch(error => {

@@ -18,7 +18,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      {%- if data.postcode | lower in ['e1 8qs','e18qs'] %}
+      {#%- if data.postcode | lower in ['e1 8qs','e18qs'] %}
         <h1 class="govuk-heading-xl">
           This area is in alert level 1
         </h1>
@@ -72,13 +72,28 @@
           There are no restrictions in this area
         </h1>
         <p class="govuk-body">This means you should follow the national guidelines.</p>
-      {% endif -%}
+      {% endif -%#}
 
-      {%- if data.postcode | lower not in ['ab14 0ab','ab140ab','ll11 0by','ll110by','bt1 1bg','bt11bg','sw1a 2aa','sw1a2aa','sw1a 2lw','sw1a2lw'] %}
+      {#%- if data.postcode | lower not in ['ab14 0ab','ab140ab','ll11 0by','ll110by','bt1 1bg','bt11bg','sw1a 2aa','sw1a2aa','sw1a 2lw','sw1a2lw'] %}
       <p class="govuk-body">
         <a class="govuk-link" href="https://draft-origin.integration.publishing.service.gov.uk/local-alert-levels?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNGM3ZGJkMy0yMDIzLTQzZDYtYmNkOS03OGVlOTU2NmRiYjYiLCJjb250ZW50X2lkIjoiOWY0NWExZTQtYTFlZi00ZTk0LTgwYjEtMmYzZDQxMTE5ZjQ3IiwiaWF0IjoxNjAxMDMzMTAzLCJleHAiOjE2MDM2Mjg3MDN9.mTrsAQ-kJ4NaCLpd38AxeFJrzs9NyhZ0kgjXRhyaHkA">Find out what you can and cannot do</a>.
       </p>
-      {% endif -%}
+      {% endif -%#}
+
+
+      <h1 class="govuk-heading-xl">
+        {% if content.alert_level %}
+          This area is in alert level {{ content.alert_level }}
+        {% else %}
+          There are no restrictions in this area
+        {% endif %}
+      </h1>
+
+      <p class="govuk-body">This is based on your postcode which we've matched to <span class="govuk-!-font-weight-bold">{{ content.name }}</span></p>
+
+      <p class="govuk-body">
+        <a class="govuk-link" href="https://www.gov.uk/{{ content.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">Find out what you can and cannot do</a>.
+      </p>
 
       <h2 class="govuk-heading-m">
         If you travel to other areas
@@ -94,8 +109,8 @@
     </div>
   </div>
 
-  {%-if content | length %}
-    <!-- {{ content | dump | safe }} -->
+  {%- if content | length %}
+    {{ content | dump | safe }}
   {% endif -%}
 
 {% endblock %}
