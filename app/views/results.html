@@ -23,7 +23,7 @@
           {%- if restriction.alert_level %}
             Local risk level {{ restriction.alert_level }}
           {% else %}
-            There are no restrictions in this area
+            Local risk level 1
           {% endif -%}
         {% else %}
           There is no information about the restrictions in this area
@@ -34,11 +34,10 @@
         <p class="govuk-body">We've matched this postcode to <span class="govuk-!-font-weight-bold">{{ location.district }}</span></p>
       {% endif -%}
 
-      {%- if restriction.alert_level %}
+
         <p class="govuk-body">
-          This area is in local risk level {{ restriction.alert_level }}
+          This area is in local risk level {{ restriction.alert_level if restriction.alert_level | length else '1' }}
         </p>
-      {% endif -%}
 
       <p class="govuk-body">
         <a class="govuk-link" href="https://www.gov.uk/{{ restriction.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">{{ 'What you can and cannot do' if restriction.guidance.link | length else 'All coronavirus infomation about what you can and cannot do' }}</a>.
