@@ -82,19 +82,19 @@
 
 
       <h1 class="govuk-heading-xl">
-        {% if content.alert_level %}
-          This area is in alert level {{ content.alert_level }}
+        {% if restriction.alert_level %}
+          This area is in alert level {{ restriction.alert_level }}
         {% else %}
           There are no restrictions in this area
         {% endif %}
       </h1>
 
-      {%- if content.name | length %}
-        <p class="govuk-body">This is based on your postcode which we've matched to <span class="govuk-!-font-weight-bold">{{ content.name }}</span></p>
+      {%- if location.district | length %}
+        <p class="govuk-body">This is based on your postcode which we've matched to <span class="govuk-!-font-weight-bold">{{ location.district }}</span></p>
       {% endif -%}
 
       <p class="govuk-body">
-        <a class="govuk-link" href="https://www.gov.uk/{{ content.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">Find out what you can and cannot do</a>.
+        <a class="govuk-link" href="https://www.gov.uk/{{ restriction.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">Find out what you can and cannot do</a>.
       </p>
 
       <h2 class="govuk-heading-m">
