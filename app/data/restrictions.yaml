@@ -45,7 +45,7 @@ E07000123:
     link: "guidance/north-west-england-local-restrictions"
   extra_restrictions: 
 E08000012:
-  alert_level: 2
+  alert_level: 3
   name: Liverpool
   start_date: 
   end_date: 
