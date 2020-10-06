@@ -63,13 +63,13 @@ router.get('/results', checkHasPostcode, (req, res) => {
     .find({ postcode: req.session.data.postcode })
     .then(data => {
       console.log(data)
-      console.log(data[0].district_code)
 
-      const code = data[0].district_code
-
-      const restriction = Restrictions.findById(code)
-
-      console.log(restriction)
+      let restriction = {}
+      if (data.length) {
+        const code = data[0].district_code
+        restriction = Restrictions.findById(code)
+        console.log(restriction)
+      }
 
       res.render('results', {
         actions: {
@@ -82,6 +82,11 @@ router.get('/results', checkHasPostcode, (req, res) => {
     })
     .catch(err => {
       console.log('ERROR 💥:', err)
+      res.render('results', {
+        actions: {
+          back: `${req.baseUrl}/`
+        }
+      })
     })
 
 
