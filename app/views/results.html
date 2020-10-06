@@ -31,13 +31,13 @@
       </h1>
 
       {%- if location.district | length %}
-        <p class="govuk-body">We've matched this postcode to <span class="govuk-!-font-weight-bold">{{ location.district }}</span></p>
+        <p class="govuk-body">We've matched this postcode to <span class="govuk-!-font-weight-bold">{{ location.district }}</span>.</p>
       {% endif -%}
 
 
       {%- if location | length %}
         <p class="govuk-body">
-          This area is in local risk level {{ restriction.alert_level if restriction.alert_level else '1' }}
+          This area is in local risk level {{ restriction.alert_level if restriction.alert_level else '1' }}.
         </p>
       {% endif -%}
 
