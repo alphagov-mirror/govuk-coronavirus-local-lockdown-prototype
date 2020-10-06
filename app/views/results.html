@@ -35,9 +35,11 @@
       {% endif -%}
 
 
+      {%- if location | length %}
         <p class="govuk-body">
           This area is in local risk level {{ restriction.alert_level if restriction.alert_level | length else '1' }}
         </p>
+      {% endif -%}
 
       <p class="govuk-body">
         <a class="govuk-link" href="https://www.gov.uk/{{ restriction.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">{{ 'What you can and cannot do' if restriction.guidance.link | length else 'All coronavirus infomation about what you can and cannot do' }}</a>.
