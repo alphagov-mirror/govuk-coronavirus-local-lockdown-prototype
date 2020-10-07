@@ -55,8 +55,11 @@ router.post('/', (req, res) => {
 })
 
 router.get('/results', checkHasPostcode, (req, res) => {
+  const postcode = req.session.data.postcode
+                    .replace(/ +?/g, '') //replace spaces in the postcode
+                    .toUpperCase() //convert postcode to upper case
   Postcode
-    .find({ postcode: req.session.data.postcode })
+    .find({ postcode_key: postcode })
     .then(doc => {
       // console.log(doc)
 
