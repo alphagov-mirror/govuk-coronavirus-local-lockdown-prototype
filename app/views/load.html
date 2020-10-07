@@ -1,0 +1,67 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/phase-banner.html" %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Load data
+      </h1>
+
+      <p class="govuk-body">
+        <a href="/load">Start again</a>
+      <p>
+
+      <ul class="govuk-list">
+        <li>
+          Total: {{ total_count }}
+        </li>
+        <li>
+          Page: {{ page_number }}
+        </li>
+      </ul>
+
+      {{ govukPubPreviousNextNavigation({
+        previous: {
+          href: actions.previous,
+          title: {
+            text: 'Previous page'
+          },
+          label: {
+            text: (page_number-1) + ' of ' + page_count
+          }
+        } if page_number >= 2,
+        next: {
+          href: actions.next,
+          title: {
+            text: 'Next page'
+          },
+          label: {
+            text: ((page_number+1) + ' of ' + page_count) if page_number else ('1 of ' + page_count)
+          }
+        } if not (page_number == page_count)
+      }) }}
+
+      {#{ data | dump | safe }#}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+    </div>
+  </div>
+
+{% endblock %}
