@@ -1,6 +1,18 @@
 
 {% extends "layout.html" %}
 
+{% macro _location(params) %}
+<p class="govuk-body">
+  We've matched the postcode <span class="govuk-!-font-weight-bold">{{ params.postcode | upper }}</span> to <span class="govuk-!-font-weight-bold">{{ params.placeName }}</span>.
+</p>
+{% endmacro %}
+
+{% macro _guidanceLink(params) %}
+<p class="govuk-body">
+  <a class="govuk-link" href="{{ params.href }}">{{ params.text }}</a>
+</p>
+{% endmacro %}
+
 {% block pageTitle %}
   {{ serviceName }}
 {% endblock %}
@@ -36,28 +48,45 @@
 
       {%- if location.country === 'Scotland' %}
 
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Find out what you can or cannot do from the Scottish Government.</a>
-        </p>
+        {%- if location.district | length %}
+          {{ _location({
+            postcode: data.postcode,
+            placeName: location.district
+          }) }}
+        {% endif -%}
+
+        {{ _guidanceLink('https://www.gov.scot/coronavirus-covid-19/', 'Find out what you can or cannot do from the Scottish Government.') }}
 
       {% elif location.country === 'Wales' %}
 
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Find out what you can or cannot do from the Welsh Government.</a>
-        </p>
+        {%- if location.district | length %}
+          {{ _location({
+            postcode: data.postcode,
+            placeName: location.district
+          }) }}
+        {% endif -%}
+
+        {{ _guidanceLink('https://gov.wales/local-lockdown', 'Find out what you can or cannot do from the Welsh Government.') }}
 
       {% elif location.country === 'Northern Ireland' %}
 
-        <p class="govuk-body">
-          <a class="govuk-link" href="#">Find out what you can or cannot do from the Northern Ireland Government.</a>
-        </p>
-
-      {% else %}
-
         {%- if location.district | length %}
-          <p class="govuk-body">We've matched the postcode <span class="govuk-!-font-weight-bold">{{ data.postcode | upper }}</span> to <span class="govuk-!-font-weight-bold">{{ location.district }}</span>.</p>
+          {{ _location({
+            postcode: data.postcode,
+            placeName: location.district
+          }) }}
         {% endif -%}
 
+        {{ _guidanceLink('https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions', 'Find out what you can or cannot do from the Northern Ireland Government.') }}
+
+      {% else -%}
+
+        {%- if location.district | length %}
+          {{ _location({
+            postcode: data.postcode,
+            placeName: location.district
+          }) }}
+        {% endif -%}
 
         {%- if location | length %}
           <p class="govuk-body">
@@ -65,17 +94,24 @@
           </p>
         {% endif -%}
 
-        <p class="govuk-body">
-          {%- if location | length %}
-            {%- if restriction.alert_level %}
-              <a class="govuk-link" href="https://www.gov.uk/{{ restriction.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">What you can and cannot do</a>.
-            {% else %}
-              <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">What you can and cannot do</a>.
-            {% endif -%}
+        {%- if location | length %}
+          {%- if restriction.alert_level %}
+            {{ _guidanceLink({
+              href: 'https://www.gov.uk/' + restriction.guidance.link,
+              text: 'What you can and cannot do.'
+            }) }}
           {% else %}
-            <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">All coronavirus infomation about what you can and cannot do</a>.
+            {{ _guidanceLink({
+              href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+              text: 'What you can and cannot do.'
+            }) }}
           {% endif -%}
-        </p>
+        {% else %}
+          {{ _guidanceLink({
+            href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+            text: 'All coronavirus infomation about what you can and cannot do.'
+          }) }}
+        {% endif -%}
 
       {% endif -%}
 
