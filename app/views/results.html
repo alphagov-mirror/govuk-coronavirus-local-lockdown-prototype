@@ -55,7 +55,10 @@
           }) }}
         {% endif -%}
 
-        {{ _guidanceLink('https://www.gov.scot/coronavirus-covid-19/', 'Find out what you can or cannot do from the Scottish Government.') }}
+        {{ _guidanceLink({
+          href: 'https://www.gov.scot/coronavirus-covid-19/',
+          text: 'Find out what you can or cannot do from the Scottish Government.'
+        }) }}
 
       {% elif location.country === 'Wales' %}
 
@@ -66,7 +69,10 @@
           }) }}
         {% endif -%}
 
-        {{ _guidanceLink('https://gov.wales/local-lockdown', 'Find out what you can or cannot do from the Welsh Government.') }}
+        {{ _guidanceLink({
+          href: 'https://gov.wales/local-lockdown',
+          text: 'Find out what you can or cannot do from the Welsh Government.'
+        }) }}
 
       {% elif location.country === 'Northern Ireland' %}
 
@@ -77,7 +83,10 @@
           }) }}
         {% endif -%}
 
-        {{ _guidanceLink('https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions', 'Find out what you can or cannot do from the Northern Ireland Government.') }}
+        {{ _guidanceLink({
+          href: 'https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions',
+          text: 'Find out what you can or cannot do from the Northern Ireland Government.'
+        }) }}
 
       {% else -%}
 
