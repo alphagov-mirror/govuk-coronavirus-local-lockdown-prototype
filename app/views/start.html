@@ -61,13 +61,14 @@
             classes: "govuk-input--width-10",
             name: "postcode",
             label: {
-              text: "Enter a postcode"
+              text: "Enter a postcode",
+              classes: "govuk-label--s"
             },
             hint: {
               text: "For example SW1A 2AA"
             },
             errorMessage: errors | getErrorMessage('postcode'),
-            value: data.postcode
+            value: data.postcode if errors | length
           }) }}
 
           {{ govukButton({
