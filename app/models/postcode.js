@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 
 const PostcodeSchema = new Schema({
   postcode: {type: String, required: true, unique: true, uppercase: true, trim: true},
+  postcode_key: {type: String, required: true, unique: true, uppercase: true, trim: true},
   in_use: Boolean,
   latitude: Number,
   longitude: Number,
