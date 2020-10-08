@@ -19,42 +19,68 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-xl">
-        {%- if location | length %}
-          {%- if restriction.alert_level %}
-            Local risk level {{ restriction.alert_level }}
-          {% else %}
-            Local risk level 1
-          {% endif -%}
+        {%- if location.country in ['Scotland','Wales','Northern Ireland'] %}
+          There might be restrictions in this area
         {% else %}
-          There is no information about the restrictions in this area
+          {%- if location | length %}
+            {%- if restriction.alert_level %}
+              Local alert level {{ restriction.alert_level }}
+            {% else %}
+              Local alert level 1
+            {% endif -%}
+          {% else %}
+            There is no information about the restrictions in this area
+          {% endif -%}
         {% endif -%}
       </h1>
 
-      {%- if location.district | length %}
-        <p class="govuk-body">We've matched the postcode <span class="govuk-!-font-weight-bold">{{ data.postcode | upper }}</span> to <span class="govuk-!-font-weight-bold">{{ location.district }}</span>.</p>
-      {% endif -%}
+      {%- if location.country === 'Scotland' %}
 
-
-      {%- if location | length %}
         <p class="govuk-body">
-          This area is in local risk level {{ restriction.alert_level if restriction.alert_level else '1' }}.
+          <a class="govuk-link" href="#">Find out what you can or cannot do from the Scottish Government.</a>
         </p>
-      {% endif -%}
 
-      <p class="govuk-body">
-        {%- if location | length %}
-          {%- if restriction.alert_level %}
-            <a class="govuk-link" href="https://www.gov.uk/{{ restriction.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">What you can and cannot do</a>.
-          {% else %}
-            <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">What you can and cannot do</a>.
-          {% endif -%}
-        {% else %}
-          <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">All coronavirus infomation about what you can and cannot do</a>.
+      {% elif location.country === 'Wales' %}
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Find out what you can or cannot do from the Welsh Government.</a>
+        </p>
+
+      {% elif location.country === 'Northern Ireland' %}
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Find out what you can or cannot do from the Northern Ireland Government.</a>
+        </p>
+
+      {% else %}
+
+        {%- if location.district | length %}
+          <p class="govuk-body">We've matched the postcode <span class="govuk-!-font-weight-bold">{{ data.postcode | upper }}</span> to <span class="govuk-!-font-weight-bold">{{ location.district }}</span>.</p>
         {% endif -%}
-      </p>
+
+
+        {%- if location | length %}
+          <p class="govuk-body">
+            This area is in local alert level {{ restriction.alert_level if restriction.alert_level else '1' }}.
+          </p>
+        {% endif -%}
+
+        <p class="govuk-body">
+          {%- if location | length %}
+            {%- if restriction.alert_level %}
+              <a class="govuk-link" href="https://www.gov.uk/{{ restriction.guidance.link | default('government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19') }}">What you can and cannot do</a>.
+            {% else %}
+              <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">What you can and cannot do</a>.
+            {% endif -%}
+          {% else %}
+            <a class="govuk-link" href="https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19">All coronavirus infomation about what you can and cannot do</a>.
+          {% endif -%}
+        </p>
+
+      {% endif -%}
 
       <h2 class="govuk-heading-m">
-        If you travel to other areas
+        If you travel to other areas {{- ' in England' if location.country in ['Scotland','Wales','Northern Ireland'] }}
       </h2>
 
       <p class="govuk-body">
