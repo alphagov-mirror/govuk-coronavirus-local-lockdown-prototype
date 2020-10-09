@@ -105,7 +105,7 @@
 
         {% if commingSoon %}
           <p class="govuk-body">
-            At the moment this area is in local risk level {{ (restriction.alert_level - 1) if restriction.alert_level else '1' }}.
+            At the moment this area is in local alert level {{ (restriction.alert_level - 1) if restriction.alert_level else '1' }}.
           </p>
         {% else %}
           {%- if location | length %}
