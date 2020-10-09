@@ -37,13 +37,13 @@
           There might be restrictions in this area
         {% else %}
           {% if commingSoon %}
-            The local alert level is changing soon
+            The Local Covid Alert Level is changing soon
           {% else %}
             {%- if location | length %}
               {%- if restriction.alert_level %}
-                Local alert level {{ restriction.alert_level }}
+                Local Covid Alert Level {{ restriction.alert_level | getAlertLevel }}
               {% else %}
-                Local alert level 1
+                Local Covid Alert Level {{ 1 | getAlertLevel }}
               {% endif -%}
             {% else %}
               There is no information about the restrictions in this area
@@ -106,7 +106,7 @@
         {% if commingSoon %}
 
           <p class="govuk-body">
-            At the moment this area is in local alert level {{ (restriction.alert_level - 1) if restriction.alert_level else '1' }}.
+            At the moment this area is in Local Covid Alert Level {{ (restriction.alert_level - 1) | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
 
           {{ _guidanceLink({
@@ -115,7 +115,7 @@
           }) }}
 
           <p class="govuk-body">
-            From the {{ restriction.start_date | date('DD MMMM') }} this area will be in local alert level {{ restriction.alert_level if restriction.alert_level else '1' }}.
+            From the {{ restriction.start_date | date('DD MMMM') }} this area will be in Local Covid Alert Level {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
 
           {{ _guidanceLink({
@@ -128,7 +128,7 @@
           {%- if location | length %}
 
             <p class="govuk-body">
-              This area is in local alert level {{ restriction.alert_level if restriction.alert_level else '1' }}.
+              This area is in Local Covid Alert Level {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
             </p>
 
             {%- if restriction.alert_level %}
