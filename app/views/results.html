@@ -104,34 +104,54 @@
         {% endif -%}
 
         {% if commingSoon %}
+
           <p class="govuk-body">
             At the moment this area is in local alert level {{ (restriction.alert_level - 1) if restriction.alert_level else '1' }}.
           </p>
+
+          {{ _guidanceLink({
+            href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+            text: 'What you can and cannot do now.'
+          }) }}
+
+          <p class="govuk-body">
+            From the {{ restriction.start_date | date('DD MMMM') }} this area will be in local alert level {{ restriction.alert_level if restriction.alert_level else '1' }}.
+          </p>
+
+          {{ _guidanceLink({
+            href: 'https://www.gov.uk/' + restriction.guidance.link,
+            text: 'What you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
+          }) }}
+
         {% else %}
+
           {%- if location | length %}
+
             <p class="govuk-body">
               This area is in local alert level {{ restriction.alert_level if restriction.alert_level else '1' }}.
             </p>
-          {% endif -%}
-        {% endif -%}
 
-        {%- if location | length %}
-          {%- if restriction.alert_level %}
-            {{ _guidanceLink({
-              href: 'https://www.gov.uk/' + restriction.guidance.link,
-              text: 'What you can and cannot do.'
-            }) }}
+            {%- if restriction.alert_level %}
+              {{ _guidanceLink({
+                href: 'https://www.gov.uk/' + restriction.guidance.link,
+                text: 'What you can and cannot do.'
+              }) }}
+            {% else %}
+              {{ _guidanceLink({
+                href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+                text: 'What you can and cannot do.'
+              }) }}
+            {% endif -%}
+
           {% else %}
+
             {{ _guidanceLink({
               href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-              text: 'What you can and cannot do.'
+              text: 'All coronavirus infomation about what you can and cannot do.'
             }) }}
+
           {% endif -%}
-        {% else %}
-          {{ _guidanceLink({
-            href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-            text: 'All coronavirus infomation about what you can and cannot do.'
-          }) }}
+
         {% endif -%}
 
       {% endif -%}
