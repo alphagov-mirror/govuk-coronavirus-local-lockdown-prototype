@@ -1,4 +1,13 @@
 ---
+E06000018:
+  alert_level: 2
+  name: Nottingham
+  start_date: 2020-10-25
+  end_date: 
+  guidance:
+    label: The guidance
+    link: "guidance/"
+  extra_restrictions: 
 E06000003:
   alert_level: 2
   name: Redcar and Cleveland
