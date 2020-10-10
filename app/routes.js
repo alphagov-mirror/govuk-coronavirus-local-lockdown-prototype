@@ -3,7 +3,8 @@
 const express = require('express')
 const router = express.Router()
 
-const fetch = require('node-fetch')
+const Postcode = require('./models/postcode')
+const Restrictions = require('./models/restrictions')
 
 function checkHasPostcode (req, res, next) {
   if (req.session.data.postcode === undefined || !req.session.data.postcode.length) {
@@ -54,28 +55,32 @@ router.post('/', (req, res) => {
 })
 
 router.get('/results', checkHasPostcode, (req, res) => {
-  let url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}`
+  const postcode = req.session.data.postcode
+                    .replace(/ +?/g, '') //replace spaces in the postcode
+                    .toUpperCase() //convert postcode to upper case
+  Postcode
+    .find({ postcode_key: postcode })
+    .then(doc => {
+      // console.log(doc)
 
-  if (process.env.MAPIT_API_KEY !== undefined && process.env.MAPIT_API_KEY.length) {
-    url = `https://mapit.mysociety.org/postcode/${req.session.data.postcode}?api_key=${process.env.MAPIT_API_KEY}`
-  }
+      let restriction = {}
+      if (doc.length) {
+        const code = doc[0].district_code
+        restriction = Restrictions.findById(code)
+        // console.log(restriction)
+      }
 
-  console.log(url)
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
       res.render('results', {
         actions: {
           back: `${req.baseUrl}/`
         },
-        content: data
+        location: doc[0],
+        restriction: restriction
       })
+
     })
-    .catch(error => {
-      console.log(error)
-      // render an error page, or the results page with an error state
+    .catch(err => {
+      // console.log('ERROR 💥:', err)
       res.render('results', {
         actions: {
           back: `${req.baseUrl}/`

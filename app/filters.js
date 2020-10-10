@@ -27,6 +27,28 @@ module.exports = function (env) {
   }
 
   /* ------------------------------------------------------------------
+    utility function to get an error for a component
+    example: {{ errors | getErrorMessage('title') }}
+    outputs: "Enter a title"
+  ------------------------------------------------------------------ */
+  filters.getAlertLevel = function (level) {
+    if (!level) {
+      return null
+    }
+
+    let alertLevel = 'Medium'
+    switch (level) {
+      case 2:
+        alertLevel = 'High'
+        break
+      case 3:
+        alertLevel = 'Very High'
+        break
+    }
+    return alertLevel
+  }
+
+  /* ------------------------------------------------------------------
     keep the following line to return your filters to the app
   ------------------------------------------------------------------ */
   return filters

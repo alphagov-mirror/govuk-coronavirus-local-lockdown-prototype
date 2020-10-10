@@ -14,6 +14,24 @@ const cookieParser = require('cookie-parser')
 // Run before other code to make sure variables from .env are available
 dotenv.config()
 
+// ==============================================
+// Setup MongoDB
+// ==============================================
+const mongoose = require('mongoose')
+
+//Set up default mongoose connection
+const uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTERNAME}-igay1.mongodb.net/${process.env.MONGODB_DBNAME}?retryWrites=true&w=majority`
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+
+//Get the default connection
+const db = mongoose.connection
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+// ==============================================
+// ==============================================
+
 // Local dependencies
 const middleware = [
   require('./lib/middleware/authentication/authentication.js'),

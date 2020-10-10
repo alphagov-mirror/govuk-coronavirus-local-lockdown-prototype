@@ -28,6 +28,27 @@ filters.date = (timestamp, format) => {
 
 /*
   ====================================================================
+  dateDiff
+  --------------------------------------------------------------------
+  Utility function to the get difference between dates
+  ====================================================================
+
+  Usage:
+
+  {{ "1970-01-01" | date("DD/MM/YYYY") }}
+
+  = 01/01/1970
+
+*/
+
+filters.dateDiff = (start, end, unit = 'days') => {
+  const a = moment(start)
+  const b = moment(end)
+  return b.diff(a, unit)
+}
+
+/*
+  ====================================================================
   arrayToDateObject
   --------------------------------------------------------------------
   Convert array to javascript date object

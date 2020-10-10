@@ -44,6 +44,7 @@
     "lodash": "^4.17.19",
     "marked": "^0.8.2",
     "moment": "^2.27.0",
+    "mongoose": "^5.10.8",
     "node-fetch": "^2.6.1",
     "notifications-node-client": "^4.7.2",
     "numeral": "^2.0.6",
