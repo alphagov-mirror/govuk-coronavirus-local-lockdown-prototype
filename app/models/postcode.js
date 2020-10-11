@@ -6,8 +6,8 @@ const mongooseFuzzySearching = require('mongoose-fuzzy-searching')
 const Schema = mongoose.Schema
 
 const PostcodeSchema = new Schema({
-  postcode: {type: String, required: true, unique: true, uppercase: true, trim: true},
-  postcode_key: {type: String, required: true, unique: true, uppercase: true, trim: true},
+  postcode: { type: String, required: true, unique: true, uppercase: true, trim: true },
+  postcode_key: { type: String, required: true, unique: true, uppercase: true, trim: true },
   postcode_area: String,
   postcode_district: String,
   latitude: Number,
@@ -27,16 +27,16 @@ const PostcodeSchema = new Schema({
   constituency_code: String,
   region: String,
   parish: String,
+  parish_code: String,
   built_up_area: String,
   built_up_sub_division: String,
-  lower_layer_super_output_area: String,
-  middle_layer_super_output_area: String,
-  london_zone: Number,
-  lsoa_code: String,
-  local_authority: String,
-  msoa_code: String,
-  parish_code: String,
   census_output_area: String,
+  lower_layer_super_output_area: String,
+  lsoa_code: String,
+  middle_layer_super_output_area: String,
+  msoa_code: String,
+  london_zone: Number,
+  local_authority: String,
   plus_code: String,
   in_use: Boolean,
   introduced: Date,
@@ -44,6 +44,6 @@ const PostcodeSchema = new Schema({
   last_updated: Date
 })
 
-PostcodeSchema.plugin(mongooseFuzzySearching, { fields: ['constituency', 'county', 'district', 'postcode', 'region', 'ward'] });
+PostcodeSchema.plugin(mongooseFuzzySearching, { fields: ['constituency', 'county', 'district', 'postcode', 'region', 'ward'] })
 
 module.exports = mongoose.model('Postcode', PostcodeSchema)
