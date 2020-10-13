@@ -8,9 +8,16 @@
 {% endmacro %}
 
 {% macro _guidanceLink(params) %}
-<p class="govuk-body">
-  <a class="govuk-link" href="{{ params.href }}">{{ params.text }}</a>
-</p>
+{{ govukPubActionLink({
+  heading: {
+    text: params.text,
+    href: params.href
+  },
+  classes: "govuk-pub-action-link--simple"
+}) }}
+<!-- <p class="govuk-body">
+  <a class="govuk-link govuk-!-font-weight-bold" href="{{ params.href }}">{{ params.text }}</a>
+</p> -->
 {% endmacro %}
 
 {% block pageTitle %}
@@ -156,7 +163,7 @@
 
       {% endif -%}
 
-      <h2 class="govuk-heading-m">
+      <h2 class="govuk-heading-m govuk-!-margin-top-9">
         If you travel to other areas {{- ' in England' if location.country in ['Scotland','Wales','Northern Ireland'] }}
       </h2>
 
