@@ -29,8 +29,10 @@
 {% from "govuk/components/textarea/macro.njk"         import govukTextarea %}
 {% from "govuk/components/warning-text/macro.njk"     import govukWarningText %}
 
-{% from "govuk-pub/components/feedback/macro.njk" import govukPubFeedback %}
-{% from "govuk-pub/components/action-link/macro.njk" import govukPubActionLink %}
+{% from "govuk-pub/components/action-link/macro.njk"        import govukPubActionLink %}
+{% from "govuk-pub/components/contents-list/macro.njk"      import govukPubContentsList %}
+{% from "govuk-pub/components/feedback/macro.njk"           import govukPubFeedback %}
+{% from "govuk-pub/components/publisher-metadata/macro.njk" import govukPubPublisherMetadata %}
 {% from "govuk-pub/components/related-navigation/macro.njk" import govukPubRelatedNavigation %}
 
 {% block head %}
@@ -63,14 +65,42 @@
       classes: "govuk-width-container"
     }) }}
     {{ govukFooter({
-      meta: {
-        items: [
-          {
-            href: "/prototype-admin/clear-data",
-            text: "Clear data"
-          }
-        ]
-      }
+      navigation: [
+        {
+          items: [
+            {
+              href: "/guidance/local-covid-alert-level-medium",
+              text: "Local COVID alert level: medium"
+            },
+            {
+              href: "/guidance/local-covid-alert-level-high",
+              text: "Local COVID alert level: high"
+            },
+            {
+              href: "/guidance/local-covid-alert-level-very-high",
+              text: "Local COVID alert level: very high"
+            },
+            {
+              href: "/guidance/coronavirus-outbreak-faqs-what-you-can-and-cant-do",
+              text: "Coronavirus outbreak FAQs: what you can and can’t do"
+            },
+            {
+              href: "/guidance/local-covid-alert-levels-what-you-need-to-know",
+              text: "Local COVID alert levels: what you need to know"
+            }
+          ]
+        },
+        {
+          items: [
+            {
+              href: "/prototype-admin/clear-data",
+              text: "Clear data"
+            }
+          ]
+        }
+      ]
+
+
     }) }}
   {% endblock %}
 {% endif %}

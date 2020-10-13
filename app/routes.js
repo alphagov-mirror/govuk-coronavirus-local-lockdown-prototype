@@ -3,6 +3,12 @@
 const express = require('express')
 const router = express.Router()
 
+const path = require('path')
+const fs = require('fs')
+const matter = require('gray-matter')
+
+const marked = require('marked')
+
 const Postcode = require('./models/postcode')
 const Restrictions = require('./models/restrictions')
 
@@ -84,6 +90,22 @@ router.get('/results', checkHasPostcode, (req, res) => {
         }
       })
     })
+})
+
+router.get('/guidance/:document', (req, res) => {
+  const file = fs.readFileSync(path.join(__dirname, 'data', req.params.document + '.md'), 'utf8')
+
+  const doc = matter(file)
+  const html = marked(doc.content)
+
+  res.render('content', {
+    actions: {
+      back: `${req.baseUrl}/`
+    },
+    meta: doc.data,
+    content: html
+  })
+
 })
 
 // --------------------------------------------------

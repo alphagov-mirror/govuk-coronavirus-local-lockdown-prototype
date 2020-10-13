@@ -1,0 +1,155 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ meta.title }} – {{ meta.type | capitalize }}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/phase-banner.html" %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "/"
+      },
+      {
+        text: "Coronavirus (COVID-19)",
+        href: "/"
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="app-c-title govuk-!-margin-top-2 govuk-!-margin-bottom-8">
+        <span class="govuk-caption-xl app-c-title__context">
+          {{- meta.type | capitalize -}}
+        </span>
+        <h1 class="app-c-title__text app-c-title__text--long">
+          {{- meta.title -}}
+        </h1>
+      </div>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body-l">
+        {{- meta.lead -}}
+      </p>
+    </div>
+  </div>
+
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {{ govukPubPublisherMetadata({
+        published: {
+          text: "Published",
+          timestamp: meta.published_date | date('DD MMMM YYYY')
+        },
+        sections: [{
+          heading: {
+            text: "From"
+          },
+          items: [{
+            heading: {
+              text: "Department of Health and Social Care"
+            },
+            href: "https://www.gov.uk/government/organisations/department-of-health-and-social-care"
+          }]
+        }]
+      }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="app-c-important-metadata app-c-important-metadata--bottom-margin">
+        <dl>
+          <dt class="app-c-important-metadata__term">Applies to: </dt>
+          <dd class="app-c-important-metadata__definition">England</dd>
+        </dl>
+      </div>
+
+      {{ govukPubContentsList({
+        heading: {
+          text: 'Contents'
+        },
+        items: meta.contents,
+        classes: "govuk-!-margin-bottom-9",
+        attributes: {
+          id: "contents"
+        }
+      }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+      {{ govukPubRelatedNavigation({
+        sections: [
+          {
+            heading: {
+              text: "Collection"
+            },
+            items: [
+              {
+                heading: {
+                  text: "Local restrictions: areas with an outbreak of coronavirus (COVID-19)"
+                },
+                href: "https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19"
+              }
+            ]
+          }
+        ]
+      }) }}
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="app-markdown">
+        {{ content | safe }}
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukPubRelatedNavigation({
+        heading: {
+          text: "Explore the topic"
+        },
+        sections: [
+          {
+            items: [
+              {
+                heading: {
+                  text: "Coronavirus (COVID-19)"
+                },
+                href: "https://www.gov.uk/coronavirus-taxon"
+              }
+            ]
+          }
+        ],
+        classes: "govuk-!-margin-top-9"
+      }) }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+
+    </div>
+  </div>
+
+{% endblock %}
