@@ -2,7 +2,7 @@
 E08000012:
   alert_level: 3
   name: Liverpool City Council
-  start_date:
+  start_date: 2020-10-26
   end_date:
   guidance:
     label: The guidance
