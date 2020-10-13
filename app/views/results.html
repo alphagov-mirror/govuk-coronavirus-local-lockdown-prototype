@@ -7,19 +7,6 @@
 </p>
 {% endmacro %}
 
-{% macro _guidanceLink(params) %}
-{{ govukPubActionLink({
-  heading: {
-    text: params.text,
-    href: params.href
-  },
-  classes: "govuk-pub-action-link--simple"
-}) }}
-<!-- <p class="govuk-body">
-  <a class="govuk-link govuk-!-font-weight-bold" href="{{ params.href }}">{{ params.text }}</a>
-</p> -->
-{% endmacro %}
-
 {% block pageTitle %}
   {{ serviceName }}
 {% endblock %}
@@ -48,9 +35,9 @@
           {% else %}
             {%- if location | length %}
               {%- if restriction.alert_level %}
-                Local COVID Alert Level {{ restriction.alert_level | getAlertLevel }}
+                Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel }}
               {% else %}
-                Local COVID Alert Level {{ 1 | getAlertLevel }}
+                Local COVID Alert Level: {{ 1 | getAlertLevel }}
               {% endif -%}
             {% else %}
               There is no information about the restrictions in this area
@@ -68,9 +55,12 @@
           }) }}
         {% endif -%}
 
-        {{ _guidanceLink({
-          href: 'https://www.gov.scot/coronavirus-covid-19/',
-          text: 'Find out what you can or cannot do from the Scottish Government.'
+        {{ govukPubActionLink({
+          heading: {
+            href: 'https://www.gov.scot/coronavirus-covid-19/',
+            text: 'Find out what you can or cannot do from the Scottish Government.'
+          },
+          classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
         }) }}
 
       {% elif location.country === 'Wales' %}
@@ -82,9 +72,12 @@
           }) }}
         {% endif -%}
 
-        {{ _guidanceLink({
-          href: 'https://gov.wales/local-lockdown',
-          text: 'Find out what you can or cannot do from the Welsh Government.'
+        {{ govukPubActionLink({
+          heading: {
+            href: 'https://gov.wales/local-lockdown',
+            text: 'Find out what you can or cannot do from the Welsh Government.'
+          },
+          classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
         }) }}
 
       {% elif location.country === 'Northern Ireland' %}
@@ -96,9 +89,12 @@
           }) }}
         {% endif -%}
 
-        {{ _guidanceLink({
-          href: 'https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions',
-          text: 'Find out what you can or cannot do from the Northern Ireland Government.'
+        {{ govukPubActionLink({
+          heading: {
+            href: 'https://www.nidirect.gov.uk/articles/coronavirus-covid-19-regulations-and-localised-restrictions',
+            text: 'Find out what you can or cannot do from the Northern Ireland Government.'
+          },
+          classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
         }) }}
 
       {% else -%}
@@ -113,21 +109,27 @@
         {% if commingSoon %}
 
           <p class="govuk-body">
-            At the moment this area is in Local COVID Alert Level {{ (restriction.alert_level - 1) | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
+            At the moment this area is in Local COVID Alert Level: {{ (restriction.alert_level - 1) | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
 
-          {{ _guidanceLink({
-            href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-            text: 'What you can and cannot do now.'
+          {{ govukPubActionLink({
+            heading: {
+              href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+              text: 'What you can and cannot do now.'
+            },
+            classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
           }) }}
 
           <p class="govuk-body">
-            From the {{ restriction.start_date | date('DD MMMM') }} this area will be in Local COVID Alert Level {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
+            From the {{ restriction.start_date | date('DD MMMM') }} this area will be in Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
 
-          {{ _guidanceLink({
-            href: 'https://www.gov.uk/' + restriction.guidance.link,
-            text: 'What you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
+          {{ govukPubActionLink({
+            heading: {
+              href: 'https://www.gov.uk/' + restriction.guidance.link,
+              text: 'What you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
+            },
+            classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
           }) }}
 
         {% else %}
@@ -135,26 +137,39 @@
           {%- if location | length %}
 
             <p class="govuk-body">
-              This area is in Local COVID Alert Level {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
+              This area is in Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
             </p>
 
             {%- if restriction.alert_level %}
-              {{ _guidanceLink({
-                href: 'https://www.gov.uk/' + restriction.guidance.link,
-                text: 'What you can and cannot do.'
+
+              {{ govukPubActionLink({
+                heading: {
+                  href: 'https://www.gov.uk/' + restriction.guidance.link,
+                  text: 'What you can and cannot do.'
+                },
+                classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
               }) }}
+
             {% else %}
-              {{ _guidanceLink({
-                href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-                text: 'What you can and cannot do.'
+
+              {{ govukPubActionLink({
+                heading: {
+                  href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+                  text: 'What you can and cannot do.'
+                },
+                classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
               }) }}
+
             {% endif -%}
 
           {% else %}
 
-            {{ _guidanceLink({
-              href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-              text: 'All coronavirus infomation about what you can and cannot do.'
+            {{ govukPubActionLink({
+              heading: {
+                href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+                text: 'All coronavirus infomation about what you can and cannot do.'
+              },
+              classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
             }) }}
 
           {% endif -%}
