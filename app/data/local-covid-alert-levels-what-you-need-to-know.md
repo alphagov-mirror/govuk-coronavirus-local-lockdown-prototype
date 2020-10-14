@@ -3,6 +3,19 @@ type: guidance
 title: "Local COVID alert levels: what you need to know"
 lead: "Information on local COVID alert levels, including what they mean, why they are being introduced and what the different levels are."
 url: https://www.gov.uk/guidance/local-covid-alert-levels-what-you-need-to-know
+published_date: 2020-10-12
+updated_date: 2020-10-12
+contents:
+  - text: "What local COVID alert levels mean"
+    href: "#what-local-covid-alert-levels-mean"
+  - text: "Why the government is introducing local COVID alert levels"
+    href: "#why-the-government-is-introducing-local-covid-alert-levels"
+  - text: "Local COVID alert level: medium"
+    href: "#local-covid-alert-level-medium"
+  - text: "Local COVID alert level: high"
+    href: "#local-covid-alert-level-high"
+  - text: "Local COVID alert level: very high"
+    href: "#local-covid-alert-level-very-high"
 ---
 
 These rules will apply from 00.01 on Wednesday 14 October. You must follow the [current guidance](https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19) until then.
@@ -13,7 +26,7 @@ Local COVID alert levels set out information for local authorities, residents an
 
 Find out what you can and cannot do if you live, work or travel in each local COVID alert level.
 
-Check the [local COVID alert level of your local area](https://www.gov.uk/find-coronavirus-local-restrictions) to see which level applies to you.
+Check the [local COVID alert level of your local area](/) to see which level applies to you.
 
 ## Why the government is introducing local COVID alert levels
 
@@ -44,7 +57,7 @@ You should continue to:
 -   work from home where you can effectively do so
 -   when travelling, plan ahead or avoid busy times and routes. Walk or cycle if you can
 
-[Find out more about the measures that apply in medium alert level areas](https://www.gov.uk/guidance/local-covid-alert-level-medium) to help reduce the spread of COVID-19.
+[Find out more about the measures that apply in medium alert level areas](/guidance/local-covid-alert-level-medium) to help reduce the spread of COVID-19.
 
 ## Local COVID alert level: high
 
@@ -72,7 +85,7 @@ You should continue to:
 -   work from home where you can effectively do so
 -   walk or cycle where possible, or plan ahead and avoid busy times and routes on public transport
 
-[Find out more about the measures that apply in high alert level areas](https://www.gov.uk/guidance/local-covid-alert-level-high) to help reduce the spread of COVID-19.
+[Find out more about the measures that apply in high alert level areas](/guidance/local-covid-alert-level-high) to help reduce the spread of COVID-19.
 
 ## Local COVID alert level: very high
 
@@ -109,6 +122,6 @@ This is the baseline in very-high alert level areas. The government will also se
 -   closing personal care and close contact services or prohibiting the highest-risk activities
 -   closing performing arts venues for the purposes of performing to audiences
 
-You should therefore [check whether additional restrictions apply in your area](https://www.gov.uk/find-coronavirus-local-restrictions).
+You should therefore [check whether additional restrictions apply in your area](/).
 
-[Find out more about the measures that apply in very high alert level areas](https://www.gov.uk/guidance/local-covid-alert-level-very-high) to help reduce the spread of COVID-19.
+[Find out more about the measures that apply in very high alert level areas](/guidance/local-covid-alert-level-very-high) to help reduce the spread of COVID-19.

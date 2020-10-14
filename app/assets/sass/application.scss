@@ -15,7 +15,6 @@ $govuk-assets-path: '/govuk/assets/';
 @import "patterns/related-items";
 
 // Components that aren't in Frontend
-@import "components/back-to-top";
 @import "components/cookie-banner";
 @import "components/global-bar";
 @import "components/important-metadata";
@@ -54,4 +53,8 @@ $govuk-assets-path: '/govuk/assets/';
   ol:last-child {
     margin-bottom: 0;
   }
+}
+
+.app-font-colour--white {
+  color: govuk-colour('white');
 }

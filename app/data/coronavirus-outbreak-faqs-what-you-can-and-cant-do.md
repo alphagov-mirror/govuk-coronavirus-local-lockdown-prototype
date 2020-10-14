@@ -1,8 +1,28 @@
 ---
 type: guidance
 title: "Coronavirus outbreak FAQs: what you can and can’t do"
-lead: 
 url: https://www.gov.uk/government/publications/coronavirus-outbreak-faqs-what-you-can-and-cant-do/coronavirus-outbreak-faqs-what-you-can-and-cant-do
+published_date: 2020-10-12
+updated_date: 2020-10-12
+contents:
+  - text: "Changes from 22 September"
+    href: "#1-changes-from-22-september"
+  - text: "Social contact"
+    href: "#2-social-contact"
+  - text: "Visiting public places and taking part in activities"
+    href: "#3-visiting-public-places-and-taking-part-in-activities"
+  - text: "Clinically vulnerable groups and clinically extremely vulnerable groups, and care homes"
+    href: "#4-clinically-vulnerable-groups-and-clinically-extremely-vulnerable-groups-and-care-homes"
+  - text: "Going to work and being COVID-19 Secure"
+    href: "#5-going-to-work-and-being-covid-19-secure"
+  - text: "Workers’ rights"
+    href: "#6-workers-rights"
+  - text: "Public Transport"
+    href: "#7-public-transport"
+  - text: "Schools and Childcare"
+    href: "#8-schools-and-childcare"
+  - text: "Borders / international visitors"
+    href: "#9-borders--international-visitors"
 ---
 
 This is national guidance that applies to England only – people in [Scotland](https://www.gov.scot/coronavirus-covid-19/), [Wales](https://gov.wales/coronavirus) and [Northern Ireland](https://www.nidirect.gov.uk/campaigns/coronavirus-covid-19) should follow the specific rules in those parts of the UK. If you live in an area that is experiencing a local COVID-19 outbreak and where local restrictions have been imposed, different guidance and legislation will apply. Please consult the [local restrictions page](https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19) to see if any restrictions are in place in your area.

@@ -1,0 +1,99 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ meta.title }} – {{ meta.type | capitalize }}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/phase-banner.html" %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "/"
+      },
+      {
+        text: "Coronavirus (COVID-19)",
+        href: "/"
+      },
+      {
+        text: "Health and wellbeing during coronavirus",
+        href: "/"
+      },
+      {
+        text: "Coronavirus outbreak FAQs: what you can and can’t do",
+        href: "#"
+      }
+    ]
+  }) }}
+  {{ govukPubOrganisationLogo({
+    text: 'Cabinet Office',
+    crest: 'single-identity',
+    brand: 'cabinet-office'
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {%- call govukPubInverseHeader({}) %}
+
+        <div class="govuk-!-padding-top-9">
+          <h1 class="govuk-heading-xl app-font-colour--white govuk-!-margin-bottom-1">
+            <span class="govuk-caption-xl app-font-colour--white govuk-!-margin-bottom-1">
+              {{- meta.type | capitalize -}}
+            </span>
+            {{- meta.title -}}
+          </h1>
+          <p class="govuk-body-s app-font-colour--white govuk-!-margin-bottom-0">
+            {{ 'Updated ' + meta.updated_date | date('DD MMMM YYYY') if meta.updated_date else 'Published ' + meta.published_date | date('DD MMMM YYYY') }}
+          </p>
+        </div>
+
+      {% endcall -%}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+
+      {#{ govukPubContentsList({
+        heading: {
+          text: 'Contents'
+        },
+        items: meta.contents,
+        attributes: {
+          id: "contents"
+        },
+        classes: "govuk-pub-contents-list__list-item--numbered"
+      }) }#}
+
+      <nav class="govuk-pub-contents-list govuk-pub-contents-list--no-underline" aria-label="Contents" role="navigation">
+        <h2 class="govuk-pub-contents-list__title">
+          Contents
+        </h2>
+        <ol class="govuk-pub-contents-list__list">
+          {%- for link in meta.contents %}
+          <li class="govuk-pub-contents-list__list-item govuk-pub-contents-list__list-item--numbered">
+            <a class="govuk-pub-contents-list__link govuk-link" href="{{ link.href }}">
+              <span class="govuk-pub-contents-list__number">{{ loop.index }}. </span>
+              <span class="govuk-pub-contents-list__numbered-text">{{ link.text }}</span>
+            </a>
+          </li>
+          {% endfor -%}
+        </ol>
+      </nav>
+
+    </div>
+    <div class="govuk-grid-column-three-quarters">
+
+      <div class="app-markdown">
+        {{ content | safe }}
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}

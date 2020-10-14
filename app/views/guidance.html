@@ -51,6 +51,14 @@
           text: "Published",
           timestamp: meta.published_date | date('DD MMMM YYYY')
         },
+        lastUpdated: {
+          text: "Last updated",
+          timestamp: meta.updated_date | date('DD MMMM YYYY')
+        } if meta.updated_date,
+        linkToHistory: {
+          href: "#",
+          text: "see all updates"
+        } if meta.updated_date,
         sections: [{
           heading: {
             text: "From"
@@ -110,7 +118,7 @@
             ]
           }
         ]
-      }) }}
+      }) if meta.related }}
 
     </div>
   </div>

@@ -30,6 +30,9 @@ contents:
     href: "#moving-home"
   - text: "Financial support"
     href: "#financial-support"
+related:
+  - text: "Local restrictions: areas with an outbreak of coronavirus (COVID-19)"
+    href: "https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19"
 ---
 
 <div class="app-call-to-action">

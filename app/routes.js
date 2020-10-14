@@ -92,13 +92,13 @@ router.get('/results', checkHasPostcode, (req, res) => {
     })
 })
 
-router.get('/guidance/:document', (req, res) => {
+router.get('/:type/:document', (req, res) => {
   const file = fs.readFileSync(path.join(__dirname, 'data', req.params.document + '.md'), 'utf8')
 
   const doc = matter(file)
   const html = marked(doc.content)
 
-  res.render('content', {
+  res.render(`${req.params.type}`, {
     actions: {
       back: `${req.baseUrl}/`
     },
