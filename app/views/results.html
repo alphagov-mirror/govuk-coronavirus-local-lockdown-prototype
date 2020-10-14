@@ -126,7 +126,7 @@
 
           {{ govukPubActionLink({
             heading: {
-              href: 'https://www.gov.uk/' + restriction.guidance.link,
+              href: restriction.guidance.link,
               text: 'What you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
             },
             classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
@@ -144,7 +144,7 @@
 
               {{ govukPubActionLink({
                 heading: {
-                  href: 'https://www.gov.uk/' + restriction.guidance.link,
+                  href: restriction.guidance.link,
                   text: 'What you can and cannot do.'
                 },
                 classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
@@ -154,7 +154,7 @@
 
               {{ govukPubActionLink({
                 heading: {
-                  href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
+                  href: '/guidance/local-covid-alert-level-medium',
                   text: 'What you can and cannot do.'
                 },
                 classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"

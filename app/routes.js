@@ -6,7 +6,6 @@ const router = express.Router()
 const path = require('path')
 const fs = require('fs')
 const matter = require('gray-matter')
-
 const marked = require('marked')
 
 const Postcode = require('./models/postcode')
@@ -94,7 +93,6 @@ router.get('/results', checkHasPostcode, (req, res) => {
 
 router.get('/:type/:document', (req, res) => {
   const file = fs.readFileSync(path.join(__dirname, 'data', req.params.document + '.md'), 'utf8')
-
   const doc = matter(file)
   const html = marked(doc.content)
 
@@ -105,7 +103,6 @@ router.get('/:type/:document', (req, res) => {
     meta: doc.data,
     content: html
   })
-
 })
 
 // --------------------------------------------------

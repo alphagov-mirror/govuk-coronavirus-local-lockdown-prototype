@@ -47,7 +47,7 @@
             </span>
             {{- meta.title -}}
           </h1>
-          <p class="govuk-body-s app-font-colour--white govuk-!-margin-bottom-0">
+          <p class="govuk-body app-font-colour--white govuk-!-margin-bottom-0">
             {{ 'Updated ' + meta.updated_date | date('DD MMMM YYYY') if meta.updated_date else 'Published ' + meta.published_date | date('DD MMMM YYYY') }}
           </p>
         </div>
