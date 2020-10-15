@@ -136,6 +136,8 @@
 
           {%- if location | length %}
 
+            <h2 class="govuk-heading-m">Current Local COVID Alert Level</h2>
+
             <p class="govuk-body">
               This area is in Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
             </p>
@@ -177,6 +179,10 @@
         {% endif -%}
 
       {% endif -%}
+
+      <div class="govuk-!-margin-top-9">
+        {% include "./includes/alert-level-changes.html" %}
+      </div>
 
       <h2 class="govuk-heading-m govuk-!-margin-top-9">
         If you travel to other areas {{- ' in England' if location.country in ['Scotland','Wales','Northern Ireland'] }}
