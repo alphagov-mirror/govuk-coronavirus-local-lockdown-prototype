@@ -115,7 +115,7 @@
           {{ govukPubActionLink({
             heading: {
               href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-              text: 'What you can and cannot do now.'
+              text: 'Check what you can and cannot do now.'
             },
             classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
           }) }}
@@ -127,7 +127,7 @@
           {{ govukPubActionLink({
             heading: {
               href: restriction.guidance.link,
-              text: 'What you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
+              text: 'Check what you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
             },
             classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
           }) }}
@@ -147,7 +147,7 @@
               {{ govukPubActionLink({
                 heading: {
                   href: restriction.guidance.link,
-                  text: 'What you can and cannot do.'
+                  text: 'Check what you can and cannot do.'
                 },
                 classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
               }) }}
@@ -157,7 +157,7 @@
               {{ govukPubActionLink({
                 heading: {
                   href: '/guidance/local-covid-alert-level-medium',
-                  text: 'What you can and cannot do.'
+                  text: 'Check what you can and cannot do.'
                 },
                 classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
               }) }}
@@ -169,7 +169,7 @@
             {{ govukPubActionLink({
               heading: {
                 href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-                text: 'All coronavirus infomation about what you can and cannot do.'
+                text: 'All coronavirus information about what you can and cannot do.'
               },
               classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
             }) }}
