@@ -108,6 +108,8 @@
 
         {% if commingSoon %}
 
+          <h2 class="govuk-heading-m">Current Local COVID Alert Level</h2>
+
           <p class="govuk-body">
             At the moment this area is in Local COVID Alert Level: {{ (restriction.alert_level - 1) | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
@@ -119,6 +121,8 @@
             },
             classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
           }) }}
+
+          <h2 class="govuk-heading-m">Future Local COVID Alert Level</h2>
 
           <p class="govuk-body">
             From the {{ restriction.start_date | date('DD MMMM') }} this area will be in Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
