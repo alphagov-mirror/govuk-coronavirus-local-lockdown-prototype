@@ -17,10 +17,13 @@ $govuk-assets-path: '/govuk/assets/';
 // Components that aren't in Frontend
 @import "components/cookie-banner";
 @import "components/global-bar";
+@import "components/important-metadata";
 
 // Objects
 
 // Core
+@import "core/markdown";
+@import "core/title";
 
 // Utilities
 @import "utilities/overwrites";
@@ -34,4 +37,24 @@ $govuk-assets-path: '/govuk/assets/';
   padding: govuk-spacing(3);
   margin: govuk-spacing(6) 0;
   background-color: govuk-colour('light-grey');
+}
+
+.app-call-to-action {
+  margin: 2em 0;
+  background-color: govuk-colour("light-grey", $legacy: "grey-3");
+  padding: 2em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  p:last-child,
+  ul:last-child,
+  ol:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.app-font-colour--white {
+  color: govuk-colour('white');
 }

@@ -3,6 +3,11 @@
 const express = require('express')
 const router = express.Router()
 
+const path = require('path')
+const fs = require('fs')
+const matter = require('gray-matter')
+const marked = require('marked')
+
 const Postcode = require('./models/postcode')
 const Restrictions = require('./models/restrictions')
 
@@ -55,9 +60,7 @@ router.post('/', (req, res) => {
 })
 
 router.get('/results', checkHasPostcode, (req, res) => {
-  const postcode = req.session.data.postcode
-                    .replace(/ +?/g, '') //replace spaces in the postcode
-                    .toUpperCase() //convert postcode to upper case
+  const postcode = req.session.data.postcode.replace(/ +?/g, '').toUpperCase()
   Postcode
     .find({ postcode_key: postcode })
     .then(doc => {
@@ -77,16 +80,29 @@ router.get('/results', checkHasPostcode, (req, res) => {
         location: doc[0],
         restriction: restriction
       })
-
     })
     .catch(err => {
-      // console.log('ERROR 💥:', err)
+      console.log('ERROR 💥:', err)
       res.render('results', {
         actions: {
           back: `${req.baseUrl}/`
         }
       })
     })
+})
+
+router.get('/:type/:document', (req, res) => {
+  const file = fs.readFileSync(path.join(__dirname, 'data', req.params.document + '.md'), 'utf8')
+  const doc = matter(file)
+  const html = marked(doc.content)
+
+  res.render(`${req.params.type}`, {
+    actions: {
+      back: `${req.baseUrl}/`
+    },
+    meta: doc.data,
+    content: html
+  })
 })
 
 // --------------------------------------------------
