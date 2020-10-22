@@ -62,7 +62,7 @@
         <p class="govuk-body govuk-!-margin-bottom-0">From 00:01 Saturday areas including London, York, etc will be moving to Local Covid Alert Level High</p>
       </div> -->
 
-      <p class="govuk-body">Enter the postcode of the place you want to find information about. For example where you live, work, or visit.</p>
+      <p class="govuk-body">Enter the postcode or name of the place you want to find information about. For example where you live, work, or visit.</p>
 
       <p class="govuk-body">Each area has a <a class="govuk-link" href="/guidance/local-covid-alert-levels-what-you-need-to-know">Local COVID Alert Level</a>. There are 3 Local COVID Alert Levels. Sometimes this is known as a ‘local lockdown’.</p>
 
@@ -79,14 +79,13 @@
 
           {{ govukInput({
             id: "search",
-            classes: "govuk-input--width-10",
             name: "search",
             label: {
-              text: "Enter a full postcode",
+              text: "Enter a postcode or place name",
               classes: "govuk-label--s"
             },
             hint: {
-              html: hintHtml
+              text: 'For example, LS1 1UR or Leeds'
             },
             errorMessage: errors | getErrorMessage('postcode'),
             value: data.postcode if errors | length
