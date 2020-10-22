@@ -1,0 +1,43 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/phase-banner.html" %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        {{ serviceName }}
+      </h1>
+
+      <p class="govuk-body">
+        We've matched the search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span> to the following places. Choose one to see the Local COVID Alert Level.
+      </p>
+
+      <ul class="govuk-list">
+        {%- for location in locations %}
+        <li>
+          <a href="{{ actions.place }}/{{ location.code }}">{{ location.name }}</a>
+        </li>
+        {% endfor -%}
+      </ul>
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {#% include "includes/related-navigation.html" %#}
+    </div>
+  </div>
+
+{% endblock %}

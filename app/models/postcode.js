@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const mongooseFuzzySearching = require('mongoose-fuzzy-searching')
+// const mongooseFuzzySearching = require('mongoose-fuzzy-searching')
 
 const Schema = mongoose.Schema
 
@@ -44,6 +44,6 @@ const PostcodeSchema = new Schema({
   last_updated: Date
 })
 
-PostcodeSchema.plugin(mongooseFuzzySearching, { fields: ['constituency', 'county', 'district', 'postcode', 'region', 'ward'] })
+// PostcodeSchema.plugin(mongooseFuzzySearching, { fields: ['district', 'postcode'] })
 
 module.exports = mongoose.model('Postcode', PostcodeSchema)

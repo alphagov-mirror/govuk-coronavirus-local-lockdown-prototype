@@ -3,7 +3,7 @@
 
 {% macro _location(params) %}
 <p class="govuk-body">
-  We've matched the postcode <span class="govuk-!-font-weight-bold">{{ params.postcode | upper }}</span> to <span class="govuk-!-font-weight-bold">{{ params.placeName }}</span>.
+  We've matched the search <span class="govuk-!-font-weight-bold">“{{ params.term }}”</span> to <span class="govuk-!-font-weight-bold">{{ params.placeName }}</span>.
 </p>
 {% endmacro %}
 
@@ -15,7 +15,7 @@
   {% include "includes/phase-banner.html" %}
   {{ govukBackLink({
     text: "Back",
-    href: "/"
+    href: actions.back
   }) }}
 {% endblock %}
 
@@ -50,7 +50,7 @@
 
         {%- if location.district | length %}
           {{ _location({
-            postcode: data.postcode,
+            term: data.search,
             placeName: location.district
           }) }}
         {% endif -%}
@@ -67,7 +67,7 @@
 
         {%- if location.district | length %}
           {{ _location({
-            postcode: data.postcode,
+            term: data.search,
             placeName: location.district
           }) }}
         {% endif -%}
@@ -84,7 +84,7 @@
 
         {%- if location.district | length %}
           {{ _location({
-            postcode: data.postcode,
+            term: data.search,
             placeName: location.district
           }) }}
         {% endif -%}
@@ -101,7 +101,7 @@
 
         {%- if location.district | length %}
           {{ _location({
-            postcode: data.postcode,
+            term: data.search,
             placeName: location.district
           }) }}
         {% endif -%}
@@ -183,10 +183,6 @@
         {% endif -%}
 
       {% endif -%}
-
-      <div class="govuk-!-margin-top-9">
-        {% include "./includes/alert-level-changes.html" %}
-      </div>
 
       <h2 class="govuk-heading-m govuk-!-margin-top-9">
         If you travel to other areas {{- ' in England' if location.country in ['Scotland','Wales','Northern Ireland'] }}
