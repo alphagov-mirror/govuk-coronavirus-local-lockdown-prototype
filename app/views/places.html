@@ -22,17 +22,31 @@
         {{ serviceName }}
       </h1>
 
-      <p class="govuk-body">
-        We've matched the search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span> to the following places. Choose one to see the Local COVID Alert Level.
-      </p>
+      {%- if locations | length %}
 
-      <ul class="govuk-list">
-        {%- for location in locations %}
-        <li>
-          <a href="{{ actions.place }}/{{ location.code }}">{{ location.name }}</a>
-        </li>
-        {% endfor -%}
-      </ul>
+        <p class="govuk-body">
+          We've matched the search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span> to the following places. Choose one to see the Local COVID Alert Level.
+        </p>
+
+        <ul class="govuk-list">
+          {%- for location in locations %}
+          <li>
+            <a href="{{ actions.place }}/{{ location.code }}">{{ location.name }}</a>
+          </li>
+          {% endfor -%}
+        </ul>
+
+      {% else %}
+
+        <p class="govuk-body">
+          We've not been able to find anything for the search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span>.
+        </p>
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="/">Enter another postcode or place name</a> to find out what restrictions there are.
+        </p>
+
+      {% endif -%}
 
     </div>
     <div class="govuk-grid-column-one-third">

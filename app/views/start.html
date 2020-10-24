@@ -72,11 +72,6 @@
 
         <form action="{{ actions.save }}" method="post" accept-charset="utf-8" novalidate>
 
-          {%- set hintHtml %}
-          <p class="govuk-hint">We use this to give you more accurate information about the area.</p>
-          <p class="govuk-hint">For example, LS1 1UR</p>
-          {% endset -%}
-
           {{ govukInput({
             id: "search",
             name: "search",
