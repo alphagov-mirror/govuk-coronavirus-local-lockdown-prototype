@@ -255,10 +255,28 @@ router.get('/:type/:document', (req, res) => {
 //   }
 // }
 //
+// const removeUnsedFuzzyElements = async (Model, attrs) => {
+//   for await (const doc of Model.find()) {
+//     const $unset = attrs.reduce((acc, attr) => ({...acc, [`${attr}_fuzzy`]: 1}), {})
+//     await Model.findByIdAndUpdate(doc._id, { $unset }, { new: true, strict: false });
+//   }
+// }
+//
 // router.get('/fuzzy', async (req, res) => {
 //
 //   // usage
-//   await updateFuzzy(Postcode, ['postcode']);
+//   // await updateFuzzy(Postcode, ['postcode']);
+//   await removeUnsedFuzzyElements(Postcode, ['postcode','district']);
+//
+//   res.render('start', {
+//
+//   })
+//
+// })
+
+// router.get('/index', async (req, res) => {
+//
+//   Postcode.createIndex( { "postcode": 1, "postcode_key": 1, "district": 1 } )
 //
 //   res.render('start', {
 //
