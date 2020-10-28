@@ -3,7 +3,7 @@
 
 {% macro _location(params) %}
 <p class="govuk-body">
-  We've matched the search <span class="govuk-!-font-weight-bold">“{{ params.term }}”</span> to <span class="govuk-!-font-weight-bold">{{ params.placeName }}</span>.
+  We've matched the search {% if params.term | length %}<span class="govuk-!-font-weight-bold">“{{ params.term }}”</span>{% endif %} to <span class="govuk-!-font-weight-bold">{{ params.placeName }}</span>.
 </p>
 {% endmacro %}
 

@@ -135,36 +135,39 @@ console.log(req.headers.referer);
 
 })
 
-router.get('/places/:place', checkHasSearchTerm, (req, res) => {
-  console.log(req.headers.referer);
-  Postcode
-    .find({ district_code: req.params.place })
-    .then(doc => {
-      // console.log(doc)
+router.get('/places/:place', (req, res) => {
+  if (req.params.place !== undefined) {
+    Postcode
+      .find({ district_code: req.params.place })
+      .then(doc => {
+        // console.log(doc)
 
-      let restriction = {}
-      if (doc.length) {
-        const code = doc[0].district_code
-        restriction = Restrictions.findById(code)
-        // console.log(restriction)
-      }
-
-      res.render('place', {
-        actions: {
-          back: req.headers.referer
-        },
-        location: doc[0],
-        restriction: restriction
-      })
-    })
-    .catch(err => {
-      console.log('ERROR 💥:', err)
-      res.render('place', {
-        actions: {
-          back: `${req.baseUrl}/`
+        let restriction = {}
+        if (doc.length) {
+          const code = doc[0].district_code
+          restriction = Restrictions.findById(code)
+          // console.log(restriction)
         }
+
+        res.render('place', {
+          actions: {
+            back: req.headers.referer
+          },
+          location: doc[0],
+          restriction: restriction
+        })
       })
-    })
+      .catch(err => {
+        console.log('ERROR 💥:', err)
+        res.render('place', {
+          actions: {
+            back: `${req.baseUrl}/`
+          }
+        })
+      })
+  } else {
+    res.redirect(`${req.baseUrl}/`)
+  }
 })
 
 router.get('/results-OLD', checkHasSearchTerm, (req, res) => {
