@@ -7,6 +7,47 @@
 </p>
 {% endmacro %}
 
+{% macro _travel(params) %}
+<h2 class="govuk-heading-m">Travelling between areas</h2>
+
+<p class="govuk-body">You can travel between areas which are in Medium or High.</p>
+<p class="govuk-body">You should only travel into or out of a Very High area if you need to travel for:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>work</li>
+  <li>education</li>
+  <li>youth services</li>
+  <li>caring responsibilities</li>
+</ul>
+
+<h3 class="govuk-heading-s">Travelling to {{ params.placeName }}</h3>
+
+{% if params.alertLevel == 1 %}
+  <p class="govuk-body">If you’re going to {{ params.placeName }} from a Medium area, the guidance is the same.</p>
+  <p class="govuk-body">If you’re going to {{ params.placeName }} from a High or Very High area, you must follow the guidance for the place you’re coming from.</p>
+{% elif params.alertLevel == 2 %}
+  <p class="govuk-body">If you’re going to {{ params.placeName }} from a Medium area, you must follow the guidance for {{ params.placeName }}, which is High.</p>
+  <p class="govuk-body">If you’re going to {{ params.placeName }} from a Very High area, you must follow the guidance for the area you’re coming from.</p>
+{% elif params.alertLevel == 3 %}
+  <p class="govuk-body">If you’re going to {{ params.placeName }} from a Medium or High area, you must follow the guidance for {{ params.placeName }}, which is Very High.</p>
+  <p class="govuk-body">If you’re going to {{ params.placeName }} from a Very High area, follow the guidance for {{ params.placeName }}.</p>
+{% endif %}
+
+<h3 class="govuk-heading-s">Travelling from {{ params.placeName }}</h3>
+
+{% if params.alertLevel == 1 %}
+  <p class="govuk-body">If you’re going from {{ params.placeName }} to a Medium area, the guidance is the same.</p>
+  <p class="govuk-body">If you're going from {{ params.placeName }} to a High or Very High area you must follow the guidance for the area you’re going to.</p>
+{% elif params.alertLevel == 2 %}
+  <p class="govuk-body">If you’re going from {{ params.placeName }} to a High area, the guidance is the same.</p>
+  <p class="govuk-body">If you're going from {{ params.placeName }} to a Medium area you must follow the guidance for {{ params.placeName }}, which is High.</p>
+  <p class="govuk-body">If you're going from {{ params.placeName }} to a Very High area you must follow the guidance for the area you’re going to.</p>
+{% elif params.alertLevel == 3 %}
+  <p class="govuk-body">If you're going from {{ params.placeName }} to a Medium or High area you must follow the guidance for {{ params.placeName }}, which is Very High.</p>
+  <p class="govuk-body">If you’re going from {{ params.placeName }} to a Very High area, follow the guidance for the place you’re going to.</p>
+{% endif %}
+
+{% endmacro %}
+
 {% block pageTitle %}
   {{ serviceName }}
 {% endblock %}
@@ -184,12 +225,17 @@
 
       {% endif -%}
 
-      <h2 class="govuk-heading-m govuk-!-margin-top-9">
-        If you travel to other areas {{- ' in England' if location.country in ['Scotland','Wales','Northern Ireland'] }}
+      {{ _travel({
+        placeName: location.district,
+        alertLevel: restriction.alert_level if restriction.alert_level else 1
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Find information about somewhere else
       </h2>
 
       <p class="govuk-body">
-        <a class="govuk-link" href="/">Enter another postcode or place name</a> to find out what restrictions there are.
+        <a class="govuk-link" href="/">Enter another postcode or place name</a>.
       </p>
 
     </div>
