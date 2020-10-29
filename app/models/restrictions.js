@@ -16,5 +16,5 @@ exports.findById = (code) => {
     return null
   }
   const restrictions = this.find()
-  return restrictions[code]
+  return restrictions[code].restrictions.pop()
 }

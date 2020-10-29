@@ -48,6 +48,26 @@
 
 {% endmacro %}
 
+{% macro _guidanceLink(params) %}
+  {% if params.alertLevel == 1 %}
+    {% set guidanceUrl = 'https://www.gov.uk/guidance/local-covid-alert-level-medium' %}
+  {% elif params.alertLevel == 2 %}
+    {% set guidanceUrl = 'https://www.gov.uk/guidance/local-covid-alert-level-high' %}
+  {% elif params.alertLevel == 3 %}
+    {% set guidanceUrl = 'https://www.gov.uk/guidance/local-covid-alert-level-very-high' %}
+  {% else %}
+    {% set guidanceUrl = 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19' %}
+  {% endif %}
+
+  {{ govukPubActionLink({
+    heading: {
+      href: guidanceUrl,
+      text: params.linkText if params.linkText else 'Check what you can and cannot do now.'
+    },
+    classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
+  }) }}
+{% endmacro %}
+
 {% block pageTitle %}
   {{ serviceName }}
 {% endblock %}
@@ -71,7 +91,7 @@
         {%- if location.country in ['Scotland','Wales','Northern Ireland'] %}
           There might be restrictions in this area
         {% else %}
-          {% if commingSoon %}
+          {% if commingSoon >= 1 %}
             The Local COVID Alert Level is changing soon
           {% else %}
             {%- if location | length %}
@@ -147,7 +167,7 @@
           }) }}
         {% endif -%}
 
-        {% if commingSoon %}
+        {% if commingSoon >= 1 %}
 
           <h2 class="govuk-heading-m">Current Local COVID Alert Level</h2>
 
@@ -155,12 +175,8 @@
             At the moment this area is in Local COVID Alert Level: {{ (restriction.alert_level - 1) | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
 
-          {{ govukPubActionLink({
-            heading: {
-              href: 'https://www.gov.uk/government/collections/local-restrictions-areas-with-an-outbreak-of-coronavirus-covid-19',
-              text: 'Check what you can and cannot do now.'
-            },
-            classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
+          {{ _guidanceLink({
+            alertLevel: (restriction.alert_level - 1) if restriction.alert_level else 1
           }) }}
 
           <h2 class="govuk-heading-m">Future Local COVID Alert Level</h2>
@@ -169,12 +185,9 @@
             From the {{ restriction.start_date | date('DD MMMM') }} this area will be in Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
           </p>
 
-          {{ govukPubActionLink({
-            heading: {
-              href: restriction.guidance.link,
-              text: 'Check what you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
-            },
-            classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
+          {{ _guidanceLink({
+            alertLevel: restriction.alert_level,
+            linkText: 'Check what you can and cannot do from ' + restriction.start_date | date('DD MMMM') + '.'
           }) }}
 
         {% else %}
@@ -187,27 +200,9 @@
               This area is in Local COVID Alert Level: {{ restriction.alert_level | getAlertLevel if restriction.alert_level else '1' | getAlertLevel }}.
             </p>
 
-            {%- if restriction.alert_level %}
-
-              {{ govukPubActionLink({
-                heading: {
-                  href: restriction.guidance.link,
-                  text: 'Check what you can and cannot do.'
-                },
-                classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
-              }) }}
-
-            {% else %}
-
-              {{ govukPubActionLink({
-                heading: {
-                  href: '/guidance/local-covid-alert-level-medium',
-                  text: 'Check what you can and cannot do.'
-                },
-                classes: "govuk-pub-action-link--simple govuk-!-margin-bottom-5"
-              }) }}
-
-            {% endif -%}
+            {{ _guidanceLink({
+              alertLevel: restriction.alert_level if restriction.alert_level else 1
+            }) }}
 
           {% else %}
 
