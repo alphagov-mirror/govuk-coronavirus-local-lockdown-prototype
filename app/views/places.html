@@ -19,13 +19,13 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-xl">
-        {{ serviceName }}
+        Choose an area to find out the restrictions
       </h1>
 
       {%- if locations | length %}
 
         <p class="govuk-body">
-          We've matched the search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span> to the following places. Choose one to see the Local COVID Alert Level.
+          We’ve matched your search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span> to these areas. Choose a place to see what you can or cannot do in that area.
         </p>
 
         <ul class="govuk-list">
@@ -39,7 +39,7 @@
       {% else %}
 
         <p class="govuk-body">
-          We've not been able to find anything for the search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span>.
+          We cannot find an area for your search <span class="govuk-!-font-weight-bold">“{{ data.search }}”</span>.
         </p>
 
         <p class="govuk-body">
