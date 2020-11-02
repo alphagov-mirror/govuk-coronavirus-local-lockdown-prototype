@@ -185,6 +185,12 @@ router.get('/results-OLD', checkHasSearchTerm, (req, res) => {
             }
           },
           {
+            middle_layer_super_output_area: {
+              $regex: searchTerm,
+              $options: 'i'
+            }
+          },
+          {
             postcode: {
               $regex: searchTerm.toUpperCase(),
               $options: 'i'
