@@ -15,6 +15,17 @@ exports.findById = (code) => {
   if (!code) {
     return null
   }
+
   const restrictions = this.find()
-  return restrictions[code]
+  let restriction = {}
+
+  if (restrictions[code] !== undefined) {
+    restriction = restrictions[code].restrictions.pop()
+  } else {
+    restriction.alert_level = 1
+    restriction.start_date = "2020-10-12"
+    restriction.start_time = "00:01"
+  }
+
+  return restriction
 }
