@@ -1,6 +1,6 @@
+---
 applications:
-  - name: govuk-coronavirus-local-lockdown
+  - name: govuk-coronavirus-local-lockdown-prototype
+    memory: 128M
     buildpacks:
       - nodejs_buildpack
-    env:
-      USERNAME: betademo
